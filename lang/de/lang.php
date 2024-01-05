@@ -419,7 +419,7 @@ return [
             ],
             'config' => [
                 'label' => 'Meta Feld-Konfiguration',
-                'comment' => 'Trage hier deine benutzerdefinierte Konfiguration ein. Die Dokumentation findest du <a href="https://docs.octobercms.com/3.x/element/form/widget-taglist.html" target="_blank">bei OctoberCMS Docs</a>.'
+                'comment' => 'Trage hier deine benutzerdefinierte Konfiguration ein. Die Dokumentation findest du <a href="https://wintercms.com/docs/v1.2/api/Backend/FormWidgets/TagList" target="_blank">bei WinterCMS Docs</a>.'
             ],
             'types' => [
                 'text' => 'Text Field',

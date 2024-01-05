@@ -418,7 +418,7 @@ return [
             ],
             'config' => [
                 'label' => 'Custom Meta Configuration',
-                'comment' => 'Pass your field definition configuration here, as documented on the <a href="https://docs.octobercms.com/3.x/element/form/widget-taglist.html" target="_blank">OctoberCMS Docs</a>.'
+                'comment' => 'Pass your field definition configuration here, as documented on the <a href="https://wintercms.com/docs/v1.2/api/Backend/FormWidgets/TagList" target="_blank">WinterCMS Docs</a>.'
             ],
             'types' => [
                 'text' => 'Text Field',

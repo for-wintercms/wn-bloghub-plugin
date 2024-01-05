@@ -6,8 +6,8 @@ use Lang;
 use Cms\Classes\Page;
 use Cms\Classes\Theme;
 use Winter\Storm\Database\Model;
-use Winter\Pages\Classes\Page as RainLabPage;
-use Winter\Pages\Classes\PageList as RainLabPageList;
+use Winter\Pages\Classes\Page as WinterPage;
+use Winter\Pages\Classes\PageList as WinterPageList;
 use System\Classes\PluginManager;
 
 class BlogHubSettings extends Model
@@ -74,7 +74,7 @@ class BlogHubSettings extends Model
             'cms_page' => Lang::get('forwintercms.bloghub::lang.settings.comments.form_tos_type.cms_page')
         ];
 
-        if (PluginManager::instance()->hasPlugin('RainLab.Pages')) {
+        if (PluginManager::instance()->hasPlugin('Winter.Pages')) {
             $options['static_page'] = Lang::get('forwintercms.bloghub::lang.settings.comments.form_tos_type.static_page');
         }
 
@@ -98,7 +98,7 @@ class BlogHubSettings extends Model
      */
     public function getFormTosStaticPageOptions()
     {
-        $list = new RainLabPageList(Theme::getActiveTheme());
+        $list = new WinterPageList(Theme::getActiveTheme());
         return $list->listPages()->sortBy('baseFileName')->lists('baseFileName', 'baseFileName');
     }
 
@@ -128,7 +128,7 @@ class BlogHubSettings extends Model
                     $inner = '<a href="'. $page->url .'">'. $inner .'</a>';
                 }
             } else if ($type === 'static_page' && ($temp = $this->get('form_tos_static_page', '')) !== '') {
-                if ($page_url = RainLabPage::url($temp)) {
+                if ($page_url = WinterPage::url($temp)) {
                     $inner = '<a href="'. $page_url .'">'. $inner .'</a>';
                 }
             }

@@ -41,9 +41,9 @@ Requirements
 - PHP 7.4+ / 8.0+
 - [Gregwar/Captcha](https://github.com/Gregwar/Captcha)
 - [Winter.Blog](https://github.com/wintercms/wn-blog-plugin)
-- **Supports:** [RainLab.User](https://github.com/wintercms/wn-user-plugin) (optional)
-- **Supports:** [RainLab.Pages](https://github.com/wintercms/wn-pages-plugin) (optional)
-- **Supports:** [RainLab.Translate](https://github.com/wintercms/wn-translate-plugin) (optional)
+- **Supports:** [Winter.User](https://github.com/wintercms/wn-user-plugin) (optional)
+- **Supports:** [Winter.Pages](https://github.com/wintercms/wn-pages-plugin) (optional)
+- **Supports:** [Winter.Translate](https://github.com/wintercms/wn-translate-plugin) (optional)
 
 
 Copyright

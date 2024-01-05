@@ -267,7 +267,7 @@ class CommentSection extends ComponentBase
     /**
      * Get Current User
      *
-     * @return RainLab\User\Models\User|Backend\Models\User|null
+     * @return Winter\User\Models\User|Backend\Models\User|null
      */
     protected function getCurrentUser()
     {
@@ -281,17 +281,17 @@ class CommentSection extends ComponentBase
     }
 
     /**
-     * Get Frontend User (when RainLab.User is installed)
+     * Get Frontend User (when Winter.User is installed)
      *
-     * @return ?RainLab\User\Models\User
+     * @return ?Winter\User\Models\User
      */
     protected function getFrontendUser()
     {
-        if (PluginManager::instance()->hasPlugin('RainLab.User')) {
-            $rainLabAuth = \RainLab\User\Classes\AuthManager::instance();
+        if (PluginManager::instance()->hasPlugin('Winter.User')) {
+            $winterAuth = \Winter\User\Classes\AuthManager::instance();
 
-            if ($rainLabAuth->check()) {
-                return $rainLabAuth->getUser();
+            if ($winterAuth->check()) {
+                return $winterAuth->getUser();
             } else {
                 return null;
             }

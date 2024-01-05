@@ -71,12 +71,12 @@ class Tag extends Model
      */
     public $belongsToMany = [
         'posts' => [
-            'RainLab\Blog\Models\Post',
+            'Winter\Blog\Models\Post',
             'table' => 'forwn_bloghub_tags_posts',
             'order' => 'published_at desc'
         ],
         'posts_count' => [
-            'RainLab\Blog\Models\Post',
+            'Winter\Blog\Models\Post',
             'table' => 'forwn_bloghub_tags_posts',
             'scope' => 'isPublished',
             'count' => true

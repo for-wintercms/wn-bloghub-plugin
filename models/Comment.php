@@ -93,7 +93,7 @@ class Comment extends Model
      * @var array
      */
     public $belongsTo = [
-        'post' => \RainLab\Blog\Models\Post::class,
+        'post' => \Winter\Blog\Models\Post::class,
         'parent' => Comment::class,
     ];
 

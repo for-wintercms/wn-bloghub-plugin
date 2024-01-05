@@ -197,7 +197,7 @@ class PostsByTag extends Posts
         // Single Tag Archive
         $tag = new Tag;
 
-        $tag = $tag->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
+        $tag = $tag->isClassExtendedWith('Winter.Translate.Behaviors.TranslatableModel')
             ? $tag->transWhere('slug', $slug)
             : $tag->where('slug', $slug);
 

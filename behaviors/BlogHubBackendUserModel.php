@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Behaviors;
+namespace ForWinterCms\BlogHub\Behaviors;
 
 use Backend\Models\User;
-use October\Rain\Extension\ExtensionBase;
-use RatMD\BlogHub\Classes\BlogHubBackendUser;
+use Winter\Storm\Extension\ExtensionBase;
+use ForWinterCms\BlogHub\Classes\BlogHubBackendUser;
 
 class BlogHubBackendUserModel extends ExtensionBase
 {

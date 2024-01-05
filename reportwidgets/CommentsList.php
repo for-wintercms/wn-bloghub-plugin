@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\ReportWidgets;
+namespace ForWinterCms\BlogHub\ReportWidgets;
 
 use AjaxException;
 use BackendAuth;
@@ -9,7 +9,7 @@ use Backend\Classes\ReportWidgetBase;
 use Cms\Classes\Controller;
 use Cms\Classes\Page;
 use Cms\Classes\Theme;
-use RatMD\BlogHub\Models\Comment;
+use ForWinterCms\BlogHub\Models\Comment;
 use System\Classes\UpdateManager;
 
 class CommentsList extends ReportWidgetBase
@@ -33,20 +33,20 @@ class CommentsList extends ReportWidgetBase
     {
         return [
             'postPage' => [
-                'title'         => 'rainlab.blog::lang.settings.posts_post',
-                'description'   => 'rainlab.blog::lang.settings.posts_post_description',
+                'title'         => 'winter.blog::lang.settings.posts_post',
+                'description'   => 'winter.blog::lang.settings.posts_post_description',
                 'type'          => 'dropdown',
                 'default'       => 'blog/post',
             ],
             'defaultTab' => [
-                'title'         => 'ratmd.bloghub::lang.components.comments_list.default_tab',
-                'description'   => 'ratmd.bloghub::lang.components.comments_list.default_tab_comment',
+                'title'         => 'forwintercms.bloghub::lang.components.comments_list.default_tab',
+                'description'   => 'forwintercms.bloghub::lang.components.comments_list.default_tab_comment',
                 'type'          => 'dropdown',
                 'options'       => [
-                    'pending'   => Lang::get('ratmd.bloghub::lang.model.comments.statusPending'),
-                    'accepted'  => Lang::get('ratmd.bloghub::lang.model.comments.statusAccepted'),
-                    'rejected'  => Lang::get('ratmd.bloghub::lang.model.comments.statusRejected'),
-                    'spam'      => Lang::get('ratmd.bloghub::lang.model.comments.statusSpam')
+                    'pending'   => Lang::get('forwintercms.bloghub::lang.model.comments.statusPending'),
+                    'accepted'  => Lang::get('forwintercms.bloghub::lang.model.comments.statusAccepted'),
+                    'rejected'  => Lang::get('forwintercms.bloghub::lang.model.comments.statusRejected'),
+                    'spam'      => Lang::get('forwintercms.bloghub::lang.model.comments.statusSpam')
                 ]
             ],
         ];
@@ -70,9 +70,9 @@ class CommentsList extends ReportWidgetBase
      */
     protected function loadAssets()
     {
-        $this->addCss('/plugins/ratmd/bloghub/assets/css/widget-commentslist.css');
+        $this->addCss('/plugins/forwintercms/bloghub/assets/css/widget-commentslist.css');
         if (version_compare(UpdateManager::instance()->getCurrentVersion(), '3.0.0', '<')) {
-            $this->addCss('/plugins/ratmd/bloghub/assets/css/widget-octoberv2.css');
+            $this->addCss('/plugins/forwintercms/bloghub/assets/css/widget-octoberv2.css');
         }
     }
 
@@ -199,23 +199,23 @@ class CommentsList extends ReportWidgetBase
         $comment_id = input('comment_id');
 
         // Check if user has Permission
-        if(!(BackendAuth::check() && BackendAuth::getUser()->hasPermission('ratmd.bloghub.comments.moderate_comments'))) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.moderate_permission'));
+        if(!(BackendAuth::check() && BackendAuth::getUser()->hasPermission('forwn.bloghub.comments.moderate_comments'))) {
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.moderate_permission'));
         }
 
         // Validate Status
         if (!in_array($status, ['approve', 'reject', 'spam'])) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.invalid_status'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.invalid_status'));
         }
 
         // Validate Comment ID
         if (empty($comment = Comment::where('id', $comment_id)->first())) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_status'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_status'));
         }
         
         // Update Status
         if (($status = $comment->{$status}()) === false) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_error'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_error'));
         }
 
         // Rebuild Comments List
@@ -231,7 +231,7 @@ class CommentsList extends ReportWidgetBase
 
         // Return Response
         return [
-            'status' => Lang::get('ratmd.bloghub::lang.frontend.success.update_status'),
+            'status' => Lang::get('forwintercms.bloghub::lang.frontend.success.update_status'),
             'counts' => [
                 'pending' => Comment::where('status', 'pending')->count(),
                 'approved' => Comment::where('status', 'approved')->count(),

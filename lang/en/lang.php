@@ -3,7 +3,7 @@
 return [
     'plugin' => [
         'name' => 'BlogHub by rat.md',
-        'description' => 'Extends RainLab.Blog with Comments, Tags, Custom Meta Fields, Archives, Statistics, Views and more.',
+        'description' => 'Extends Winter.Blog with Comments, Tags, Custom Meta Fields, Archives, Statistics, Views and more.',
     ],
 
     'components' => [

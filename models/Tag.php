@@ -1,20 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Models;
+namespace ForWinterCms\BlogHub\Models;
 
 use Model;
 use Illuminate\Support\Str;
 
 class Tag extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
+    use \Winter\Storm\Database\Traits\Validation;
 
     /**
      * Table associated with this Model
      * 
      * @var string
      */
-    public $table = 'ratmd_bloghub_tags';
+    public $table = 'forwn_bloghub_tags';
 
     /**
      * Enable Modal Timestamps
@@ -51,7 +51,7 @@ class Tag extends Model
      * @var array
      */
     public $rules = [
-        'slug' => 'required|unique:ratmd_bloghub_tags'
+        'slug' => 'required|unique:forwn_bloghub_tags'
     ];
 
     /**
@@ -72,12 +72,12 @@ class Tag extends Model
     public $belongsToMany = [
         'posts' => [
             'RainLab\Blog\Models\Post',
-            'table' => 'ratmd_bloghub_tags_posts',
+            'table' => 'forwn_bloghub_tags_posts',
             'order' => 'published_at desc'
         ],
         'posts_count' => [
             'RainLab\Blog\Models\Post',
-            'table' => 'ratmd_bloghub_tags_posts',
+            'table' => 'forwn_bloghub_tags_posts',
             'scope' => 'isPublished',
             'count' => true
         ]

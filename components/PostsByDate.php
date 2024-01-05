@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
 use Redirect;
-use RainLab\Blog\Components\Posts;
-use RainLab\Blog\Models\Post;
+use Winter\Blog\Components\Posts;
+use Winter\Blog\Models\Post;
 
 class PostsByDate extends Posts
 {
@@ -38,8 +38,8 @@ class PostsByDate extends Posts
     public function componentDetails()
     {
         return [
-            'name'          => 'ratmd.bloghub::lang.components.date.label',
-            'description'   => 'ratmd.bloghub::lang.components.date.comment'
+            'name'          => 'forwintercms.bloghub::lang.components.date.label',
+            'description'   => 'forwintercms.bloghub::lang.components.date.comment'
         ];
     }
 
@@ -52,11 +52,11 @@ class PostsByDate extends Posts
     {
         $properties = parent::defineProperties();
         $properties['dateFilter'] = [
-            'title'         => 'ratmd.bloghub::lang.components.date.filter',
-            'description'   => 'ratmd.bloghub::lang.components.date.filter_comment',
+            'title'         => 'forwintercms.bloghub::lang.components.date.filter',
+            'description'   => 'forwintercms.bloghub::lang.components.date.filter_comment',
             'type'          => 'string',
             'default'       => '{{ :date }}',
-            'group'         => 'ratmd.bloghub::lang.components.bloghub_group',
+            'group'         => 'forwintercms.bloghub::lang.components.bloghub_group',
         ];
         return $properties;
     }
@@ -166,7 +166,7 @@ class PostsByDate extends Posts
          */
         $isPublished = !parent::checkEditor();
 
-        $posts = Post::with(['categories', 'featured_images', 'ratmd_bloghub_tags'])
+        $posts = Post::with(['categories', 'featured_images', 'forwn_bloghub_tags'])
             ->whereBetween('published_at', [$start_date, $end_date])
             ->listFrontEnd([
                 'page'             => $this->property('pageNumber'),

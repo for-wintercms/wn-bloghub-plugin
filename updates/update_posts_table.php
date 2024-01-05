@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Updates;
+namespace ForWinterCms\BlogHub\Updates;
 
 use Schema;
 use Illuminate\Database\Schema\Blueprint;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 use System\Classes\PluginManager;
 
 /**
@@ -12,19 +12,18 @@ use System\Classes\PluginManager;
  */
 class CreateViewsTable extends Migration
 {
-
     /**
      * @inheritDoc
      */
     public function up()
     {
-        if (!PluginManager::instance()->hasPlugin('RainLab.Blog')) {
+        if (!PluginManager::instance()->hasPlugin('Winter.Blog')) {
             return;
         }
 
-        Schema::table('rainlab_blog_posts', function (Blueprint $table) {
-            $table->integer('ratmd_bloghub_views')->unsigned()->default(0);
-            $table->integer('ratmd_bloghub_unique_views')->unsigned()->default(0);
+        Schema::table('winter_blog_posts', function (Blueprint $table) {
+            $table->integer('forwn_bloghub_views')->unsigned()->default(0);
+            $table->integer('forwn_bloghub_unique_views')->unsigned()->default(0);
         });
     }
 
@@ -34,19 +33,18 @@ class CreateViewsTable extends Migration
     public function down()
     {
         if (method_exists(Schema::class, 'dropColumns')) {
-            Schema::dropColumns('rainlab_blog_posts', ['ratmd_bloghub_views', 'ratmd_bloghub_unique_views']);
+            Schema::dropColumns('winter_blog_posts', ['forwn_bloghub_views', 'forwn_bloghub_unique_views']);
         } else {
-            Schema::table('rainlab_blog_posts', function (Blueprint $table) {
-                if (Schema::hasColumn('rainlab_blog_posts', 'ratmd_bloghub_views')) {
-                    $table->dropColumn('ratmd_bloghub_views');
+            Schema::table('winter_blog_posts', function (Blueprint $table) {
+                if (Schema::hasColumn('winter_blog_posts', 'forwn_bloghub_views')) {
+                    $table->dropColumn('forwn_bloghub_views');
                 }
             });
-            Schema::table('rainlab_blog_posts', function (Blueprint $table) {
-                if (Schema::hasColumn('rainlab_blog_posts', 'ratmd_bloghub_unique_views')) {
-                    $table->dropColumn('ratmd_bloghub_unique_views');
+            Schema::table('winter_blog_posts', function (Blueprint $table) {
+                if (Schema::hasColumn('winter_blog_posts', 'forwn_bloghub_unique_views')) {
+                    $table->dropColumn('forwn_bloghub_unique_views');
                 }
             });
         }
     }
-
 }

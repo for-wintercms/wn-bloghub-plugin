@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
 use Lang;
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
-use RainLab\Blog\Models\Post;
-use RatMD\BlogHub\Models\Comment;
+use Winter\Blog\Models\Post;
+use ForWinterCms\BlogHub\Models\Comment;
 
 class CommentList extends ComponentBase
 {
@@ -26,8 +26,8 @@ class CommentList extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'ratmd.bloghub::lang.components.comments_list.label',
-            'description' => 'ratmd.bloghub::lang.components.comments_list.comment'
+            'name'        => 'forwintercms.bloghub::lang.components.comments_list.label',
+            'description' => 'forwintercms.bloghub::lang.components.comments_list.comment'
         ];
     }
 
@@ -40,41 +40,41 @@ class CommentList extends ComponentBase
     {
         return [
             'postPage' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_post',
-                'description'       => 'rainlab.blog::lang.settings.posts_post_description',
+                'title'             => 'winter.blog::lang.settings.posts_post',
+                'description'       => 'winter.blog::lang.settings.posts_post_description',
                 'type'              => 'dropdown',
                 'default'           => '',
-                'group'             => 'rainlab.blog::lang.settings.group_links',
+                'group'             => 'winter.blog::lang.settings.group_links',
             ],
             'excludePosts' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_list.exclude_posts',
-                'description'       => 'ratmd.bloghub::lang.components.comments_list.exclude_posts_description',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_list.exclude_posts',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_list.exclude_posts_description',
                 'type'              => 'string',
                 'default'           => '',
             ],
             'amount' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_list.amount',
-                'description'       => 'ratmd.bloghub::lang.components.comments_list.amount_description',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_list.amount',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_list.amount_description',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'ratmd.bloghub::lang.components.comments_list.amount_validation',
+                'validationMessage' => 'forwintercms.bloghub::lang.components.comments_list.amount_validation',
                 'default'           => '5',
             ],
             'sortOrder' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_order',
-                'description'       => 'rainlab.blog::lang.settings.posts_order_description',
+                'title'             => 'winter.blog::lang.settings.posts_order',
+                'description'       => 'winter.blog::lang.settings.posts_order_description',
                 'type'              => 'dropdown',
                 'default'           => 'published_at desc',
             ],
             'onlyFavorites' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_list.only_favorites',
-                'description'       => 'ratmd.bloghub::lang.components.comments_list.only_favorites_description',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_list.only_favorites',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_list.only_favorites_description',
                 'type'              => 'checkbox',
                 'default'           => '0'
             ],
             'hideOnDislikes' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.hide_on_dislike',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.hide_on_dislike_description',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.hide_on_dislike',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.hide_on_dislike_description',
                 'type'              => 'string',
                 'default'           => '0'
             ]
@@ -99,12 +99,12 @@ class CommentList extends ComponentBase
     public function getSortOrderOptions()
     {
         return [
-            'created_at DESC'   => Lang::get('ratmd.bloghub::lang.sorting.created_at_desc'),
-            'created_at ASC'    => Lang::get('ratmd.bloghub::lang.sorting.created_at_asc'),
-            'likes DESC'        => Lang::get('ratmd.bloghub::lang.sorting.likes_desc'),
-            'likes ASC'         => Lang::get('ratmd.bloghub::lang.sorting.likes_asc'),
-            'dislikes DESC'     => Lang::get('ratmd.bloghub::lang.sorting.dislikes_desc'),
-            'dislikes ASC'      => Lang::get('ratmd.bloghub::lang.sorting.dislikes_asc'),
+            'created_at DESC'   => Lang::get('forwintercms.bloghub::lang.sorting.created_at_desc'),
+            'created_at ASC'    => Lang::get('forwintercms.bloghub::lang.sorting.created_at_asc'),
+            'likes DESC'        => Lang::get('forwintercms.bloghub::lang.sorting.likes_desc'),
+            'likes ASC'         => Lang::get('forwintercms.bloghub::lang.sorting.likes_asc'),
+            'dislikes DESC'     => Lang::get('forwintercms.bloghub::lang.sorting.dislikes_desc'),
+            'dislikes ASC'      => Lang::get('forwintercms.bloghub::lang.sorting.dislikes_asc'),
         ];
     }
 

@@ -3,16 +3,16 @@
 # ===================================
 
 # Model List Column configuration
-list: $/ratmd/bloghub/models/tag/columns.yaml
+list: $/forwintercms/bloghub/models/tag/columns.yaml
 
 # Model Class name
-modelClass: RatMD\BlogHub\Models\Tag
+modelClass: ForWinterCms\BlogHub\Models\Tag
 
 # List Title
-title: ratmd.bloghub::lang.model.tags.manage
+title: forwintercms.bloghub::lang.model.tags.manage
 
 # Link URL for each record
-recordUrl: ratmd/bloghub/tags/update/:id
+recordUrl: forwintercms/bloghub/tags/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

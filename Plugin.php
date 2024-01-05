@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub;
+namespace ForWinterCms\BlogHub;
 
 use Backend;
 use Event;
@@ -11,13 +11,13 @@ use Backend\Models\User as BackendUser;
 use Backend\Widgets\Lists;
 use Cms\Classes\Controller;
 use Cms\Classes\Theme;
-use RainLab\Blog\Controllers\Posts;
-use RainLab\Blog\Models\Post;
-use RatMD\BlogHub\Behaviors\BlogHubBackendUserModel;
-use RatMD\BlogHub\Behaviors\BlogHubPostModel;
-use RatMD\BlogHub\Models\Comment;
-use RatMD\BlogHub\Models\MetaSettings;
-use RatMD\BlogHub\Models\Visitor;
+use Winter\Blog\Controllers\Posts;
+use Winter\Blog\Models\Post;
+use ForWinterCms\BlogHub\Behaviors\BlogHubBackendUserModel;
+use ForWinterCms\BlogHub\Behaviors\BlogHubPostModel;
+use ForWinterCms\BlogHub\Models\Comment;
+use ForWinterCms\BlogHub\Models\MetaSettings;
+use ForWinterCms\BlogHub\Models\Visitor;
 use Symfony\Component\Yaml\Yaml;
 use System\Classes\PluginBase;
 
@@ -30,7 +30,7 @@ class Plugin extends PluginBase
      * @var array
      */
     public $require = [
-        'RainLab.Blog'
+        'Winter.Blog'
     ];
 
     /**
@@ -41,11 +41,11 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'ratmd.bloghub::lang.plugin.name',
-            'description' => 'ratmd.bloghub::lang.plugin.description',
-            'author'      => 'RatMD <info@rat.md>',
+            'name'        => 'forwintercms.bloghub::lang.plugin.name',
+            'description' => 'forwintercms.bloghub::lang.plugin.description',
+            'author'      => 'ForWinterCms <info@rat.md>',
             'icon'        => 'icon-tags',
-            'homepage'    => 'https://github.com/RatMD/bloghub-plugin'
+            'homepage'    => 'https://github.com/for-wintercms/wn-bloghub-plugin'
         ];
     }
 
@@ -58,12 +58,12 @@ class Plugin extends PluginBase
     {
 
         // Extend available sorting options
-        Post::$allowedSortingOptions['ratmd_bloghub_views asc'] = 'ratmd.bloghub::lang.sorting.bloghub_views_asc';
-        Post::$allowedSortingOptions['ratmd_bloghub_views desc'] = 'ratmd.bloghub::lang.sorting.bloghub_views_desc';
-        Post::$allowedSortingOptions['ratmd_bloghub_unique_views asc'] = 'ratmd.bloghub::lang.sorting.bloghub_unique_views_asc';
-        Post::$allowedSortingOptions['ratmd_bloghub_unique_views desc'] = 'ratmd.bloghub::lang.sorting.bloghub_unique_views_desc';
-        Post::$allowedSortingOptions['ratmd_bloghub_comments_count asc'] = 'ratmd.bloghub::lang.sorting.bloghub_comments_count_asc';
-        Post::$allowedSortingOptions['ratmd_bloghub_comments_count desc'] = 'ratmd.bloghub::lang.sorting.bloghub_comments_count_desc';
+        Post::$allowedSortingOptions['forwn_bloghub_views asc'] = 'forwintercms.bloghub::lang.sorting.bloghub_views_asc';
+        Post::$allowedSortingOptions['forwn_bloghub_views desc'] = 'forwintercms.bloghub::lang.sorting.bloghub_views_desc';
+        Post::$allowedSortingOptions['forwn_bloghub_unique_views asc'] = 'forwintercms.bloghub::lang.sorting.bloghub_unique_views_asc';
+        Post::$allowedSortingOptions['forwn_bloghub_unique_views desc'] = 'forwintercms.bloghub::lang.sorting.bloghub_unique_views_desc';
+        Post::$allowedSortingOptions['forwn_bloghub_comments_count asc'] = 'forwintercms.bloghub::lang.sorting.bloghub_comments_count_asc';
+        Post::$allowedSortingOptions['forwn_bloghub_comments_count desc'] = 'forwintercms.bloghub::lang.sorting.bloghub_comments_count_desc';
     }
 
     /**
@@ -73,29 +73,29 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        // Add side menuts to RainLab.Blog
+        // Add side menuts to Winter.Blog
         Event::listen('backend.menu.extendItems', function($manager) {
-            $manager->addSideMenuItems('RainLab.Blog', 'blog', [
-                'ratmd_bloghub_tags' => [
-                    'label'         => 'ratmd.bloghub::lang.model.tags.label',
+            $manager->addSideMenuItems('Winter.Blog', 'blog', [
+                'forwn_bloghub_tags' => [
+                    'label'         => 'forwintercms.bloghub::lang.model.tags.label',
                     'icon'          => 'icon-tags',
-                    'code'          => 'ratmd-bloghub-tags',
-                    'owner'         => 'RatMD.BlogHub',
-                    'url'           => Backend::url('ratmd/bloghub/tags'),
+                    'code'          => 'forwn-bloghub-tags',
+                    'owner'         => 'ForWinterCms.BlogHub',
+                    'url'           => Backend::url('forwintercms/bloghub/tags'),
                     'permissions'   => [
-                        'ratmd.bloghub.tags'
+                        'forwn.bloghub.tags'
                     ]
                 ],
 
-                'ratmd_bloghub_comments' => [
-                    'label'         => 'ratmd.bloghub::lang.model.comments.label',
+                'forwn_bloghub_comments' => [
+                    'label'         => 'forwintercms.bloghub::lang.model.comments.label',
                     'icon'          => 'icon-comments-o',
-                    'code'          => 'ratmd-bloghub-comments',
-                    'owner'         => 'RatMD.BlogHub',
-                    'url'           => Backend::url('ratmd/bloghub/comments'),
+                    'code'          => 'forwn-bloghub-comments',
+                    'owner'         => 'ForWinterCms.BlogHub',
+                    'url'           => Backend::url('forwintercms/bloghub/comments'),
                     'counter'       => Comment::where('status', 'pending')->count(),
                     'permissions'   => [
-                        'ratmd.bloghub.comments'
+                        'forwn.bloghub.comments'
                     ]
                 ]
             ]);
@@ -119,13 +119,13 @@ class Plugin extends PluginBase
             $visitor = Visitor::currentUser();
             if (!$visitor->hasSeen($post)) {
                 if ($guest) {
-                    $post->ratmd_bloghub_unique_views = is_numeric($post->ratmd_bloghub_unique_views)? $post->ratmd_bloghub_unique_views+1: 1;
+                    $post->forwn_bloghub_unique_views = is_numeric($post->forwn_bloghub_unique_views)? $post->forwn_bloghub_unique_views+1: 1;
                 }
                 $visitor->markAsSeen($post);
             }
 
             if ($guest) {
-                $post->ratmd_bloghub_views = is_numeric($post->ratmd_bloghub_views)? $post->ratmd_bloghub_views+1: 1;
+                $post->forwn_bloghub_views = is_numeric($post->forwn_bloghub_views)? $post->forwn_bloghub_views+1: 1;
 
                 if (!empty($post->url)) {
                     $url = $post->url;
@@ -141,8 +141,14 @@ class Plugin extends PluginBase
         });
 
         // Implement custom Models
-        Post::extend(fn (Post $model) => $model->implementClassWith(BlogHubPostModel::class));
-        BackendUser::extend(fn (BackendUser $model) => $model->implementClassWith(BlogHubBackendUserModel::class));
+        Post::extend(function($page) {
+            if (!$page->isClassExtendedWith(BlogHubPostModel::class))
+                $page->extendClassWith(BlogHubPostModel::class);
+        });
+        BackendUser::extend(function($backendUser) {
+            if (!$backendUser->isClassExtendedWith(BlogHubBackendUserModel::class))
+                $backendUser->extendClassWith(BlogHubBackendUserModel::class);
+        });
 
         // Extend Form Fields on Posts Controller
         Posts::extendFormFields(function ($form, $model, $context) {
@@ -152,44 +158,44 @@ class Plugin extends PluginBase
 
             // Add Comments Field
             $form->addSecondaryTabFields([
-                'ratmd_bloghub_comment_visible' => [
-                    'tab'           => 'ratmd.bloghub::lang.model.comments.label',
+                'forwn_bloghub_comment_visible' => [
+                    'tab'           => 'forwintercms.bloghub::lang.model.comments.label',
                     'type'          => 'switch',
-                    'label'         => 'ratmd.bloghub::lang.model.comments.post_visibility.label',
-                    'comment'       => 'ratmd.bloghub::lang.model.comments.post_visibility.comment',
+                    'label'         => 'forwintercms.bloghub::lang.model.comments.post_visibility.label',
+                    'comment'       => 'forwintercms.bloghub::lang.model.comments.post_visibility.comment',
                     'span'          => 'left',
-                    'permissions'   => ['ratmd.bloghub.comments.access_comments_settings']
+                    'permissions'   => ['forwn.bloghub.comments.access_comments_settings']
                 ],
-                'ratmd_bloghub_comment_mode' => [
-                    'tab'           => 'ratmd.bloghub::lang.model.comments.label',
+                'forwn_bloghub_comment_mode' => [
+                    'tab'           => 'forwintercms.bloghub::lang.model.comments.label',
                     'type'          => 'dropdown',
-                    'label'         => 'ratmd.bloghub::lang.model.comments.post_mode.label',
-                    'comment'       => 'ratmd.bloghub::lang.model.comments.post_mode.comment',
+                    'label'         => 'forwintercms.bloghub::lang.model.comments.post_mode.label',
+                    'comment'       => 'forwintercms.bloghub::lang.model.comments.post_mode.comment',
                     'showSearch'    => false,
                     'span'          => 'left',
                     'options'       => [
-                        'open' => 'ratmd.bloghub::lang.model.comments.post_mode.open',
-                        'restricted' => 'ratmd.bloghub::lang.model.comments.post_mode.restricted',
-                        'private' => 'ratmd.bloghub::lang.model.comments.post_mode.private',
-                        'closed' => 'ratmd.bloghub::lang.model.comments.post_mode.closed',
+                        'open' => 'forwintercms.bloghub::lang.model.comments.post_mode.open',
+                        'restricted' => 'forwintercms.bloghub::lang.model.comments.post_mode.restricted',
+                        'private' => 'forwintercms.bloghub::lang.model.comments.post_mode.private',
+                        'closed' => 'forwintercms.bloghub::lang.model.comments.post_mode.closed',
                     ],
-                    'permissions'   => ['ratmd.bloghub.comments.access_comments_settings']
+                    'permissions'   => ['forwn.bloghub.comments.access_comments_settings']
                 ],
             ]);
 
             // Build Meta Map
-            $meta = $model->ratmd_bloghub_meta->mapWithKeys(fn ($item, $key) => [$item['name'] => $item['value']])->all();
-            $model->ratmd_bloghub_meta_temp = $meta;
+            $meta = $model->forwn_bloghub_meta->mapWithKeys(fn ($item, $key) => [$item['name'] => $item['value']])->all();
+            $model->forwn_bloghub_meta_temp = $meta;
 
             // Add Tags Field
             $form->addSecondaryTabFields([
-                'ratmd_bloghub_tags' => [
-                    'label'         => 'ratmd.bloghub::lang.model.tags.label',
+                'forwn_bloghub_tags' => [
+                    'label'         => 'forwintercms.bloghub::lang.model.tags.label',
                     'mode'          => 'relation',
-                    'tab'           => 'rainlab.blog::lang.post.tab_categories',
+                    'tab'           => 'winter.blog::lang.post.tab_categories',
                     'type'          => 'taglist',
                     'nameFrom'      => 'slug',
-                    'permissions'   => ['ratmd.bloghub.tags']
+                    'permissions'   => ['forwn.bloghub.tags']
                 ]
             ]);
 
@@ -216,16 +222,16 @@ class Plugin extends PluginBase
                     }
                 }
             }
-            $config = array_merge($config, Theme::getActiveTheme()->getConfig()['ratmd.bloghub']['post'] ?? []);
+            $config = array_merge($config, Theme::getActiveTheme()->getConfig()['forwn.bloghub']['post'] ?? []);
 
             // Add Custom Meta Fields
             if (!empty($config)) {
                 foreach ($config AS $key => $value) {
                     if (empty($value['tab'])) {
-                        $value['tab'] = 'ratmd.bloghub::lang.settings.defaultTab';
+                        $value['tab'] = 'forwintercms.bloghub::lang.settings.defaultTab';
                     }
                     $form->addSecondaryTabFields([
-                        "ratmd_bloghub_meta_temp[$key]" => array_merge($value, [
+                        "forwn_bloghub_meta_temp[$key]" => array_merge($value, [
                             'value' => $meta[$key] ?? '',
                             'default' => $meta[$key] ?? ''
                         ])
@@ -241,10 +247,10 @@ class Plugin extends PluginBase
             }
     
             $list->addColumns([
-                'ratmd_bloghub_views' => [
-                    'label' => 'ratmd.bloghub::lang.model.visitors.views',
+                'forwn_bloghub_views' => [
+                    'label' => 'forwintercms.bloghub::lang.model.visitors.views',
                     'type' => 'number',
-                    'select' => 'concat(rainlab_blog_posts.ratmd_bloghub_views, " / ", rainlab_blog_posts.ratmd_bloghub_unique_views)',
+                    'select' => 'concat(winter_blog_posts.forwn_bloghub_views, " / ", winter_blog_posts.forwn_bloghub_unique_views)',
                     'align' => 'left'
                 ]
             ]);
@@ -253,9 +259,9 @@ class Plugin extends PluginBase
         // Add Posts Filter Scope
         Posts::extendListFilterScopes(function ($filter) {
             $filter->addScopes([
-                'ratmd_bloghub_tags' => [
-                    'label' => 'ratmd.bloghub::lang.model.tags.label',
-                    'modelClass' => 'RatMD\BlogHub\Models\Tag',
+                'forwn_bloghub_tags' => [
+                    'label' => 'forwintercms.bloghub::lang.model.tags.label',
+                    'modelClass' => 'ForWinterCms\BlogHub\Models\Tag',
                     'nameFrom' => 'slug',
                     'scope' => 'FilterTags'
                 ]
@@ -270,23 +276,23 @@ class Plugin extends PluginBase
     
             // Add Display Name
             $form->addTabFields([
-                'ratmd_bloghub_display_name' => [
-                    'label'         => 'ratmd.bloghub::lang.model.users.displayName',
-                    'description'   => 'ratmd.bloghub::lang.model.users.displayNameDescription',
+                'forwn_bloghub_display_name' => [
+                    'label'         => 'forwintercms.bloghub::lang.model.users.displayName',
+                    'description'   => 'forwintercms.bloghub::lang.model.users.displayNameDescription',
                     'tab'           => 'backend::lang.user.account',
                     'type'          => 'text',
                     'span'          => 'left'
                 ],
-                'ratmd_bloghub_author_slug' => [
-                    'label'         => 'ratmd.bloghub::lang.model.users.authorSlug',
-                    'description'   => 'ratmd.bloghub::lang.model.users.authorSlugDescription',
+                'forwn_bloghub_author_slug' => [
+                    'label'         => 'forwintercms.bloghub::lang.model.users.authorSlug',
+                    'description'   => 'forwintercms.bloghub::lang.model.users.authorSlugDescription',
                     'tab'           => 'backend::lang.user.account',
                     'type'          => 'text',
                     'span'          => 'right'
                 ],
-                'ratmd_bloghub_about_me' => [
-                    'label'         => 'ratmd.bloghub::lang.model.users.aboutMe',
-                    'description'   => 'ratmd.bloghub::lang.model.users.aboutMeDescription',
+                'forwn_bloghub_about_me' => [
+                    'label'         => 'forwintercms.bloghub::lang.model.users.aboutMe',
+                    'description'   => 'forwintercms.bloghub::lang.model.users.aboutMeDescription',
                     'tab'           => 'backend::lang.user.account',
                     'type'          => 'textarea',
                 ]
@@ -302,19 +308,19 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \RatMD\BlogHub\Components\Base::class => 'bloghubBase',
-            \RatMD\BlogHub\Components\PostsByAuthor::class => 'bloghubPostsByAuthor',
-            \RatMD\BlogHub\Components\PostsByCommentCount::class => 'bloghubPostsByCommentCount',
-            \RatMD\BlogHub\Components\PostsByDate::class => 'bloghubPostsByDate',
-            \RatMD\BlogHub\Components\PostsByTag::class => 'bloghubPostsByTag',
-            \RatMD\BlogHub\Components\CommentList::class => 'bloghubCommentList',
-            \RatMD\BlogHub\Components\CommentSection::class => 'bloghubCommentSection',
-            \RatMD\BlogHub\Components\Tags::class => 'bloghubTags',
+            \ForWinterCms\BlogHub\Components\Base::class => 'bloghubBase',
+            \ForWinterCms\BlogHub\Components\PostsByAuthor::class => 'bloghubPostsByAuthor',
+            \ForWinterCms\BlogHub\Components\PostsByCommentCount::class => 'bloghubPostsByCommentCount',
+            \ForWinterCms\BlogHub\Components\PostsByDate::class => 'bloghubPostsByDate',
+            \ForWinterCms\BlogHub\Components\PostsByTag::class => 'bloghubPostsByTag',
+            \ForWinterCms\BlogHub\Components\CommentList::class => 'bloghubCommentList',
+            \ForWinterCms\BlogHub\Components\CommentSection::class => 'bloghubCommentSection',
+            \ForWinterCms\BlogHub\Components\Tags::class => 'bloghubTags',
 
             // Deprecated Components
-            \RatMD\BlogHub\Components\DeprecatedAuthors::class => 'bloghubAuthorArchive',
-            \RatMD\BlogHub\Components\DeprecatedDates::class => 'bloghubDateArchive',
-            \RatMD\BlogHub\Components\DeprecatedTag::class => 'bloghubTagArchive',
+            \ForWinterCms\BlogHub\Components\DeprecatedAuthors::class => 'bloghubAuthorArchive',
+            \ForWinterCms\BlogHub\Components\DeprecatedDates::class => 'bloghubDateArchive',
+            \ForWinterCms\BlogHub\Components\DeprecatedTag::class => 'bloghubTagArchive',
         ];
     }
 
@@ -326,31 +332,31 @@ class Plugin extends PluginBase
     public function registerPermissions()
     {
         return [
-            'ratmd.bloghub.comments' => [
-                'tab'   => 'rainlab.blog::lang.blog.tab',
-                'label' => 'ratmd.bloghub::lang.permissions.access_comments',
-                'comment' => 'ratmd.bloghub::lang.permissions.access_comments_comment',
+            'forwn.bloghub.comments' => [
+                'tab'   => 'winter.blog::lang.blog.tab',
+                'label' => 'forwintercms.bloghub::lang.permissions.access_comments',
+                'comment' => 'forwintercms.bloghub::lang.permissions.access_comments_comment',
             ],
-            'ratmd.bloghub.comments.access_comments_settings' => [
-                'tab'   => 'rainlab.blog::lang.blog.tab',
-                'label' => 'ratmd.bloghub::lang.permissions.manage_post_settings'
+            'forwn.bloghub.comments.access_comments_settings' => [
+                'tab'   => 'winter.blog::lang.blog.tab',
+                'label' => 'forwintercms.bloghub::lang.permissions.manage_post_settings'
             ],
-            'ratmd.bloghub.comments.moderate_comments' => [
-                'tab'   => 'rainlab.blog::lang.blog.tab',
-                'label' => 'ratmd.bloghub::lang.permissions.moderate_comments'
+            'forwn.bloghub.comments.moderate_comments' => [
+                'tab'   => 'winter.blog::lang.blog.tab',
+                'label' => 'forwintercms.bloghub::lang.permissions.moderate_comments'
             ],
-            'ratmd.bloghub.comments.delete_comments' => [
-                'tab'   => 'rainlab.blog::lang.blog.tab',
-                'label' => 'ratmd.bloghub::lang.permissions.delete_commpents'
+            'forwn.bloghub.comments.delete_comments' => [
+                'tab'   => 'winter.blog::lang.blog.tab',
+                'label' => 'forwintercms.bloghub::lang.permissions.delete_commpents'
             ],
-            'ratmd.bloghub.tags' => [
-                'tab'   => 'rainlab.blog::lang.blog.tab',
-                'label' => 'ratmd.bloghub::lang.permissions.access_tags',
-                'comment' => 'ratmd.bloghub::lang.permissions.access_tags_comment',
+            'forwn.bloghub.tags' => [
+                'tab'   => 'winter.blog::lang.blog.tab',
+                'label' => 'forwintercms.bloghub::lang.permissions.access_tags',
+                'comment' => 'forwintercms.bloghub::lang.permissions.access_tags_comment',
             ],
-            'ratmd.bloghub.tags.promoted' => [
-                'tab'   => 'rainlab.blog::lang.blog.tab',
-                'label' => 'ratmd.bloghub::lang.permissions.promote_tags'
+            'forwn.bloghub.tags.promoted' => [
+                'tab'   => 'winter.blog::lang.blog.tab',
+                'label' => 'forwintercms.bloghub::lang.permissions.promote_tags'
             ]
         ];
     }
@@ -373,26 +379,26 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
         return [
-            'ratmd_bloghub_config' => [
-                'label'         => 'ratmd.bloghub::lang.settings.config.label',
-                'description'   => 'ratmd.bloghub::lang.settings.config.description',
-                'category'      => 'rainlab.blog::lang.blog.menu_label',
+            'forwn_bloghub_config' => [
+                'label'         => 'forwintercms.bloghub::lang.settings.config.label',
+                'description'   => 'forwintercms.bloghub::lang.settings.config.description',
+                'category'      => 'winter.blog::lang.blog.menu_label',
                 'icon'          => 'icon-pencil-square-o',
-                'class'         => 'RatMD\BlogHub\Models\BlogHubSettings',
+                'class'         => 'ForWinterCms\BlogHub\Models\BlogHubSettings',
                 'order'         => 500,
                 'keywords'      => 'blog post meta data',
-                'permissions'   => ['rainlab.blog.manage_settings'],
+                'permissions'   => ['winter.blog.manage_settings'],
                 'size'          => 'adaptive'
             ],
-            'ratmd_bloghub_meta' => [
-                'label'         => 'ratmd.bloghub::lang.settings.meta.label',
-                'description'   => 'ratmd.bloghub::lang.settings.meta.description',
-                'category'      => 'rainlab.blog::lang.blog.menu_label',
+            'forwn_bloghub_meta' => [
+                'label'         => 'forwintercms.bloghub::lang.settings.meta.label',
+                'description'   => 'forwintercms.bloghub::lang.settings.meta.description',
+                'category'      => 'winter.blog::lang.blog.menu_label',
                 'icon'          => 'icon-list-ul',
-                'class'         => 'RatMD\BlogHub\Models\MetaSettings',
+                'class'         => 'ForWinterCms\BlogHub\Models\MetaSettings',
                 'order'         => 500,
                 'keywords'      => 'blog post meta data',
-                'permissions'   => ['rainlab.blog.manage_settings'],
+                'permissions'   => ['winter.blog.manage_settings'],
                 'size'          => 'adaptive'
             ]
         ];
@@ -406,26 +412,26 @@ class Plugin extends PluginBase
     public function registerReportWidgets()
     {
         return [
-            \RatMD\BlogHub\ReportWidgets\CommentsList::class => [
-                'label' => 'ratmd.bloghub::lang.widgets.comments_list.label',
+            \ForWinterCms\BlogHub\ReportWidgets\CommentsList::class => [
+                'label' => 'forwintercms.bloghub::lang.widgets.comments_list.label',
                 'context' => 'dashboard',
                 'permission' => [
-                    'rainlab.blog.access_other_posts',
-                    'ratmd.bloghub.comments'
+                    'winter.blog.access_other_posts',
+                    'forwn.bloghub.comments'
                 ]
             ],
-            \RatMD\BlogHub\ReportWidgets\PostsList::class => [
-                'label' => 'ratmd.bloghub::lang.widgets.posts_list.label',
+            \ForWinterCms\BlogHub\ReportWidgets\PostsList::class => [
+                'label' => 'forwintercms.bloghub::lang.widgets.posts_list.label',
                 'context' => 'dashboard',
                 'permission' => [
-                    'rainlab.blog.access_other_posts'
+                    'winter.blog.access_other_posts'
                 ]
             ],
-            \RatMD\BlogHub\ReportWidgets\PostsStatistics::class => [
-                'label' => 'ratmd.bloghub::lang.widgets.posts_statistics.label',
+            \ForWinterCms\BlogHub\ReportWidgets\PostsStatistics::class => [
+                'label' => 'forwintercms.bloghub::lang.widgets.posts_statistics.label',
                 'context' => 'dashboard',
                 'permission' => [
-                    'rainlab.blog.access_other_posts'
+                    'winter.blog.access_other_posts'
                 ]
             ],
         ];

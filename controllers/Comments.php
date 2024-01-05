@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Controllers;
+namespace ForWinterCms\BlogHub\Controllers;
 
 use BackendMenu;
 use Backend\Classes\Controller;
@@ -38,7 +38,7 @@ class Comments extends Controller
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('RainLab.Blog', 'blog', 'ratmd_bloghub_comments');
+        BackendMenu::setContext('Winter.Blog', 'blog', 'forwn_bloghub_comments');
     }
     
 }

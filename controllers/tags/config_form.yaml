@@ -3,28 +3,28 @@
 # ===================================
 
 # Record name
-name: ratmd.bloghub::lang.model.tags.recordName
+name: forwintercms.bloghub::lang.model.tags.recordName
 
 # Model Form Field configuration
-form: $/ratmd/bloghub/models/tag/fields.yaml
+form: $/forwintercms/bloghub/models/tag/fields.yaml
 
 # Model Class name
-modelClass: RatMD\BlogHub\Models\Tag
+modelClass: ForWinterCms\BlogHub\Models\Tag
 
 # Default redirect location
-defaultRedirect: ratmd/bloghub/tags
+defaultRedirect: forwintercms/bloghub/tags
 
 # Create page
 create:
     title: backend::lang.form.create_title
-    redirect: ratmd/bloghub/tags/update/:id
-    redirectClose: ratmd/bloghub/tags
+    redirect: forwintercms/bloghub/tags/update/:id
+    redirectClose: forwintercms/bloghub/tags
 
 # Update page
 update:
     title: backend::lang.form.update_title
-    redirect: ratmd/bloghub/tags
-    redirectClose: ratmd/bloghub/tags
+    redirect: forwintercms/bloghub/tags
+    redirectClose: forwintercms/bloghub/tags
 
 # Preview page
 preview:

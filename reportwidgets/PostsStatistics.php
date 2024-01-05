@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\ReportWidgets;
+namespace ForWinterCms\BlogHub\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
 use DateInterval;
 use DateTime;
 use Lang;
-use RainLab\Blog\Models\Post;
+use Winter\Blog\Models\Post;
 use System\Classes\UpdateManager;
 
 class PostsStatistics extends ReportWidgetBase
@@ -30,8 +30,8 @@ class PostsStatistics extends ReportWidgetBase
     {
         return [
             'defaultDateRange' => [
-                'title'         => 'ratmd.bloghub::lang.components.post.date_range',
-                'description'   => 'ratmd.bloghub::lang.components.post.date_range_comment',
+                'title'         => 'forwintercms.bloghub::lang.components.post.date_range',
+                'description'   => 'forwintercms.bloghub::lang.components.post.date_range_comment',
                 'type'          => 'dropdown',
                 'default'       => '14 days',
             ],
@@ -46,12 +46,12 @@ class PostsStatistics extends ReportWidgetBase
     public function getDefaultdateRangeOptions()
     {
         return [
-            '7 days'        => Lang::get('ratmd.bloghub::lang.components.post.7days'),
-            '14 days'       => Lang::get('ratmd.bloghub::lang.components.post.14days'),
-            '31 days'       => Lang::get('ratmd.bloghub::lang.components.post.31days'),
-            '3 months'      => Lang::get('ratmd.bloghub::lang.components.post.3months'),
-            '6 months'      => Lang::get('ratmd.bloghub::lang.components.post.6months'),
-            '12 months'     => Lang::get('ratmd.bloghub::lang.components.post.12months')
+            '7 days'        => Lang::get('forwintercms.bloghub::lang.components.post.7days'),
+            '14 days'       => Lang::get('forwintercms.bloghub::lang.components.post.14days'),
+            '31 days'       => Lang::get('forwintercms.bloghub::lang.components.post.31days'),
+            '3 months'      => Lang::get('forwintercms.bloghub::lang.components.post.3months'),
+            '6 months'      => Lang::get('forwintercms.bloghub::lang.components.post.6months'),
+            '12 months'     => Lang::get('forwintercms.bloghub::lang.components.post.12months')
         ];
     }
 
@@ -64,7 +64,7 @@ class PostsStatistics extends ReportWidgetBase
     protected function loadAssets()
     {
         if (version_compare(UpdateManager::instance()->getCurrentVersion(), '3.0.0', '<')) {
-            $this->addCss('/plugins/ratmd/bloghub/assets/css/widget-octoberv2.css');
+            $this->addCss('/plugins/forwintercms/bloghub/assets/css/widget-octoberv2.css');
         }
     }
 
@@ -142,8 +142,8 @@ class PostsStatistics extends ReportWidgetBase
             $end = date('Y-m-d', $timestamp + ($step * 24 * 60 * 60)) . ' 00:00:00';
 
             $count = $posts->whereBetween('published_at', [$start, $end]);
-            $result['views'][] = '[' . $timestamp*1000 . ', ' . $count->sum('ratmd_bloghub_views') . ']';
-            $result['visitors'][] = '[' . $timestamp*1000 . ', ' . $count->sum('ratmd_bloghub_unique_views') . ']';
+            $result['views'][] = '[' . $timestamp*1000 . ', ' . $count->sum('forwn_bloghub_views') . ']';
+            $result['visitors'][] = '[' . $timestamp*1000 . ', ' . $count->sum('forwn_bloghub_unique_views') . ']';
         }
 
         return $result;

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
 use Backend\Models\User as BackendUser;
-use RainLab\Blog\Components\Posts;
-use RainLab\Blog\Models\Post;
+use Winter\Blog\Components\Posts;
+use Winter\Blog\Models\Post;
 
 class PostsByAuthor extends Posts
 {
@@ -24,8 +24,8 @@ class PostsByAuthor extends Posts
     public function componentDetails()
     {
         return [
-            'name'          => 'ratmd.bloghub::lang.components.author.label',
-            'description'   => 'ratmd.bloghub::lang.components.author.comment'
+            'name'          => 'forwintercms.bloghub::lang.components.author.label',
+            'description'   => 'forwintercms.bloghub::lang.components.author.comment'
         ];
     }
 
@@ -38,11 +38,11 @@ class PostsByAuthor extends Posts
     {
         $properties = parent::defineProperties();
         $properties['authorFilter'] = [
-            'title'         => 'ratmd.bloghub::lang.components.author.filter',
-            'description'   => 'ratmd.bloghub::lang.components.author.filter_comment',
+            'title'         => 'forwintercms.bloghub::lang.components.author.filter',
+            'description'   => 'forwintercms.bloghub::lang.components.author.filter_comment',
             'type'          => 'string',
             'default'       => '{{ :slug }}',
-            'group'         => 'ratmd.bloghub::lang.components.bloghub_group',
+            'group'         => 'forwintercms.bloghub::lang.components.bloghub_group',
         ];
         return $properties;
     }
@@ -103,7 +103,7 @@ class PostsByAuthor extends Posts
          */
         $isPublished = !parent::checkEditor();
 
-        $posts = Post::with(['categories', 'featured_images', 'ratmd_bloghub_tags', 'ratmd_bloghub_meta'])
+        $posts = Post::with(['categories', 'featured_images', 'forwn_bloghub_tags', 'forwn_bloghub_meta'])
             ->where('user_id', '=', $author)
             ->listFrontEnd([
                 'page'             => $this->property('pageNumber'),
@@ -146,13 +146,13 @@ class PostsByAuthor extends Posts
             return null;
         }
 
-        if(($user = BackendUser::where('ratmd_bloghub_author_slug', $slug)->first()) === null) {
+        if(($user = BackendUser::where('forwn_bloghub_author_slug', $slug)->first()) === null) {
             if ($this->getBlogHubConfig()['authorUseSlugOnly'] === '0') {
                 if (($user = BackendUser::where('login', $slug)->first()) === null) {
                     return null;
                 }
 
-                if (!empty($user->ratmd_bloghub_author_slug)) {
+                if (!empty($user->forwn_bloghub_author_slug)) {
                     return null;
                 }
             } else {

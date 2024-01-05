@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Models;
+namespace ForWinterCms\BlogHub\Models;
 
 use Model;
-use RainLab\Blog\Models\Post;
+use Winter\Blog\Models\Post;
 
 class Visitor extends Model
 {
@@ -13,7 +13,7 @@ class Visitor extends Model
      * 
      * @var string
      */
-    public $table = 'ratmd_bloghub_visitors';
+    public $table = 'forwn_bloghub_visitors';
 
     /**
      * Enable Modal Timestamps

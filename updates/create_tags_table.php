@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Updates;
+namespace ForWinterCms\BlogHub\Updates;
 
 use Schema;
 use Illuminate\Database\Schema\Blueprint;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 use System\Classes\PluginManager;
 
 /**
@@ -12,17 +12,16 @@ use System\Classes\PluginManager;
  */
 class CreateTagsTable extends Migration
 {
-
     /**
      * @inheritDoc
      */
     public function up()
     {
-        if (!PluginManager::instance()->hasPlugin('RainLab.Blog')) {
+        if (!PluginManager::instance()->hasPlugin('Winter.Blog')) {
             return;
         }
 
-        Schema::create('ratmd_bloghub_tags', function(Blueprint $table) {
+        Schema::create('forwn_bloghub_tags', function(Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
@@ -34,15 +33,15 @@ class CreateTagsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ratmd_bloghub_tags_posts', function(Blueprint $table) {
+        Schema::create('forwn_bloghub_tags_posts', function(Blueprint $table) {
             $table->engine = 'InnoDB';
             
             $table->integer('tag_id')->unsigned();
             $table->integer('post_id')->unsigned();
 
             $table->primary(['tag_id', 'post_id']);
-            $table->foreign('tag_id')->references('id')->on('ratmd_bloghub_tags')->onDelete('cascade');
-            $table->foreign('post_id')->references('id')->on('rainlab_blog_posts')->onDelete('cascade');
+            $table->foreign('tag_id')->references('id')->on('forwn_bloghub_tags')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('winter_blog_posts')->onDelete('cascade');
         });
     }
 
@@ -51,8 +50,7 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratmd_bloghub_tags_posts');
-        Schema::dropIfExists('ratmd_bloghub_tags');
+        Schema::dropIfExists('forwn_bloghub_tags_posts');
+        Schema::dropIfExists('forwn_bloghub_tags');
     }
-
 }

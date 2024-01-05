@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Models;
+namespace ForWinterCms\BlogHub\Models;
 
-use October\Rain\Database\Model;
+use Winter\Storm\Database\Model;
 
 class MetaSettings extends Model
 {
@@ -19,7 +19,7 @@ class MetaSettings extends Model
      *
      * @var string
      */
-    public $settingsCode = 'ratmd_bloghub_meta_settings';
+    public $settingsCode = 'forwn_bloghub_meta_settings';
 
     /**
      * Settings Fields

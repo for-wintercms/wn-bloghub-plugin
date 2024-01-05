@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
-use RainLab\Blog\Components\Posts;
-use RainLab\Blog\Models\Post;
+use Winter\Blog\Components\Posts;
+use Winter\Blog\Models\Post;
 
 class PostsByCommentCount extends Posts
 {
@@ -16,8 +16,8 @@ class PostsByCommentCount extends Posts
     public function componentDetails()
     {
         return [
-            'name'          => 'ratmd.bloghub::lang.components.comment_count.label',
-            'description'   => 'ratmd.bloghub::lang.components.comment_count.comment'
+            'name'          => 'forwintercms.bloghub::lang.components.comment_count.label',
+            'description'   => 'forwintercms.bloghub::lang.components.comment_count.comment'
         ];
     }
 
@@ -58,11 +58,11 @@ class PostsByCommentCount extends Posts
          */
         $isPublished = !parent::checkEditor();
 
-        $posts = Post::with(['categories', 'featured_images', 'ratmd_bloghub_tags', 'ratmd_bloghub_meta'])
-            ->withCount('ratmd_bloghub_comments')
+        $posts = Post::with(['categories', 'featured_images', 'forwn_bloghub_tags', 'forwn_bloghub_meta'])
+            ->withCount('forwn_bloghub_comments')
             ->listFrontEnd([
                 'page'             => $this->property('pageNumber'),
-                'sort'             => 'ratmd_bloghub_comments_count desc',
+                'sort'             => 'forwn_bloghub_comments_count desc',
                 'perPage'          => $this->property('postsPerPage'),
                 'search'           => trim(input('search') ?? ''),
                 'category'         => $category,

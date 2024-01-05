@@ -3,28 +3,28 @@
 # ===================================
 
 # Record name
-name: ratmd.bloghub::lang.model.comments.recordName
+name: forwintercms.bloghub::lang.model.comments.recordName
 
 # Model Form Field configuration
-form: $/ratmd/bloghub/models/comment/fields.yaml
+form: $/forwintercms/bloghub/models/comment/fields.yaml
 
 # Model Class name
-modelClass: RatMD\BlogHub\Models\Comment
+modelClass: ForWinterCms\BlogHub\Models\Comment
 
 # Default redirect location
-defaultRedirect: ratmd/bloghub/comments
+defaultRedirect: forwintercms/bloghub/comments
 
 # Create page
 create:
     title: backend::lang.form.create_title
-    redirect: ratmd/bloghub/comments/update/:id
-    redirectClose: ratmd/bloghub/comments
+    redirect: forwintercms/bloghub/comments/update/:id
+    redirectClose: forwintercms/bloghub/comments
 
 # Update page
 update:
     title: backend::lang.form.update_title
-    redirect: ratmd/bloghub/comments
-    redirectClose: ratmd/bloghub/comments
+    redirect: forwintercms/bloghub/comments
+    redirectClose: forwintercms/bloghub/comments
 
 # Preview page
 preview:

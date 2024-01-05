@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Updates;
+namespace ForWinterCms\BlogHub\Updates;
 
 use Schema;
 use Illuminate\Database\Schema\Blueprint;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 use System\Classes\PluginManager;
 
 /**
@@ -12,22 +12,23 @@ use System\Classes\PluginManager;
  */
 class CreateVisitorsTable extends Migration
 {
-
     /**
      * @inheritDoc
      */
     public function up()
     {
-        if (!PluginManager::instance()->hasPlugin('RainLab.Blog')) {
+        if (!PluginManager::instance()->hasPlugin('Winter.Blog')) {
             return;
         }
 
-        Schema::create('ratmd_bloghub_visitors', function (Blueprint $table) {
+        Schema::create('forwn_bloghub_visitors', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
             $table->string('user', 64);
             $table->json('posts')->nullable();
+            $table->text('likes')->nullable();
+            $table->text('dislikes')->nullable();
 
             $table->timestamps();
         });
@@ -38,7 +39,6 @@ class CreateVisitorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratmd_bloghub_visitors');
+        Schema::dropIfExists('forwn_bloghub_visitors');
     }
-
 }

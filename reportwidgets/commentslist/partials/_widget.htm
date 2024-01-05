@@ -1,5 +1,5 @@
 <div class="report-widget" style="min-height: 335px">
-    <h3><?= Lang::get('ratmd.bloghub::lang.model.comments.label') ?></h3>
+    <h3><?= Lang::get('forwintercms.bloghub::lang.model.comments.label') ?></h3>
 
     <div class="bloghub-report-widget widget-commentslist">
         <ul class="nav">
@@ -10,7 +10,7 @@
                     data-request="onChangeTab"
                     data-request-data="tab: 'pending'"
                     data-request-success="[].map.call(this.closest('ul').querySelectorAll('[data-tab]'), e => e.classList[e.dataset.tab == data.tab? 'add': 'remove']('active'))">
-                    <?= Lang::get('ratmd.bloghub::lang.model.comments.statusPending') ?>
+                    <?= Lang::get('forwintercms.bloghub::lang.model.comments.statusPending') ?>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark" data-counter="pending">
                         <?= $counts['pending'] ?>
                     </span>
@@ -23,7 +23,7 @@
                     data-request="onChangeTab"
                     data-request-data="tab: 'approved'"
                     data-request-success="[].map.call(this.closest('ul').querySelectorAll('[data-tab]'), e => e.classList[e.dataset.tab == data.tab? 'add': 'remove']('active'))">
-                    <?= Lang::get('ratmd.bloghub::lang.model.comments.statusApproved') ?>
+                    <?= Lang::get('forwintercms.bloghub::lang.model.comments.statusApproved') ?>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark" data-counter="approved">
                         <?= $counts['approved'] ?>
                     </span>
@@ -36,7 +36,7 @@
                     data-request="onChangeTab"
                     data-request-data="tab: 'rejected'"
                     data-request-success="[].map.call(this.closest('ul').querySelectorAll('[data-tab]'), e => e.classList[e.dataset.tab == data.tab? 'add': 'remove']('active'))">
-                    <?= Lang::get('ratmd.bloghub::lang.model.comments.statusRejected') ?>
+                    <?= Lang::get('forwintercms.bloghub::lang.model.comments.statusRejected') ?>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark" data-counter="rejected">
                         <?= $counts['rejected'] ?>
                     </span>
@@ -49,7 +49,7 @@
                     data-request="onChangeTab"
                     data-request-data="tab: 'spam'"
                     data-request-success="[].map.call(this.closest('ul').querySelectorAll('[data-tab]'), e => e.classList[e.dataset.tab == data.tab? 'add': 'remove']('active'))">
-                    <?= Lang::get('ratmd.bloghub::lang.model.comments.statusSpam') ?>
+                    <?= Lang::get('forwintercms.bloghub::lang.model.comments.statusSpam') ?>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light text-dark" data-counter="spam">
                         <?= $counts['spam'] ?>
                     </span>

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Models;
+namespace ForWinterCms\BlogHub\Models;
 
 use Model;
 
@@ -12,7 +12,7 @@ class Meta extends Model
      * 
      * @var string
      */
-    public $table = 'ratmd_bloghub_meta';
+    public $table = 'forwn_bloghub_meta';
 
     /**
      * Enable Modal Timestamps

@@ -4,37 +4,37 @@
 
 columns:
     slug:
-        label: ratmd.bloghub::lang.model.tags.slug
+        label: forwintercms.bloghub::lang.model.tags.slug
         searchable: true
     
     title:
-        label: ratmd.bloghub::lang.model.tags.title
+        label: forwintercms.bloghub::lang.model.tags.title
         searchable: true
     
     promote:
-        label: ratmd.bloghub::lang.model.tags.promote
+        label: forwintercms.bloghub::lang.model.tags.promote
         type: switch
         default: false
     
     color:
-        label: ratmd.bloghub::lang.model.tags.color
+        label: forwintercms.bloghub::lang.model.tags.color
         type: colorpicker
     
     posts:
-        label: ratmd.bloghub::lang.model.tags.postsNumber
+        label: forwintercms.bloghub::lang.model.tags.postsNumber
         type: number
         align: left
         select: >
             (
                 SELECT count(*)
-                FROM ratmd_bloghub_tags_posts
-                WHERE ratmd_bloghub_tags_posts.tag_id = ratmd_bloghub_tags.id
+                FROM forwn_bloghub_tags_posts
+                WHERE forwn_bloghub_tags_posts.tag_id = forwn_bloghub_tags.id
             )
 
     created_at:
-        label: rainlab.blog::lang.post.created
+        label: winter.blog::lang.post.created
         invisible: true
 
     updated_at:
-        label: rainlab.blog::lang.post.updated
+        label: winter.blog::lang.post.updated
         invisible: true

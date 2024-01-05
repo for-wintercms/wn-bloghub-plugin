@@ -8,10 +8,10 @@ scopes:
         label: Status
         conditions: status in (:filtered)
         options:
-            pending: ratmd.bloghub::lang.model.comments.statusPending
-            approved: ratmd.bloghub::lang.model.comments.statusApproved
-            rejected: ratmd.bloghub::lang.model.comments.statusRejected
-            spam: ratmd.bloghub::lang.model.comments.statusSpam
+            pending: forwintercms.bloghub::lang.model.comments.statusPending
+            approved: forwintercms.bloghub::lang.model.comments.statusApproved
+            rejected: forwintercms.bloghub::lang.model.comments.statusRejected
+            spam: forwintercms.bloghub::lang.model.comments.statusSpam
         default:
             - pending
             - approved

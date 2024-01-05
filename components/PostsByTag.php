@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
-use RainLab\Blog\Components\Posts;
-use RainLab\Blog\Models\Post;
-use RatMD\BlogHub\Models\Tag;
+use Winter\Blog\Components\Posts;
+use Winter\Blog\Models\Post;
+use ForWinterCms\BlogHub\Models\Tag;
 
 class PostsByTag extends Posts
 {
@@ -31,8 +31,8 @@ class PostsByTag extends Posts
     public function componentDetails()
     {
         return [
-            'name'          => 'ratmd.bloghub::lang.components.tag.label',
-            'description'   => 'ratmd.bloghub::lang.components.tag.comment'
+            'name'          => 'forwintercms.bloghub::lang.components.tag.label',
+            'description'   => 'forwintercms.bloghub::lang.components.tag.comment'
         ];
     }
 
@@ -45,11 +45,11 @@ class PostsByTag extends Posts
     {
         $properties = parent::defineProperties();
         $properties['tagFilter'] = [
-            'title'         => 'ratmd.bloghub::lang.components.tag.filter',
-            'description'   => 'ratmd.bloghub::lang.components.tag.filter_comment',
+            'title'         => 'forwintercms.bloghub::lang.components.tag.filter',
+            'description'   => 'forwintercms.bloghub::lang.components.tag.filter_comment',
             'type'          => 'string',
             'default'       => '{{ :slug }}',
-            'group'         => 'ratmd.bloghub::lang.components.bloghub_group',
+            'group'         => 'forwintercms.bloghub::lang.components.bloghub_group',
         ];
         return $properties;
     }
@@ -118,20 +118,20 @@ class PostsByTag extends Posts
         $isPublished = !parent::checkEditor();
 
         // Prepare Query
-        $query = Post::with(['categories', 'featured_images', 'ratmd_bloghub_tags']);
+        $query = Post::with(['categories', 'featured_images', 'forwn_bloghub_tags']);
         if ($tagsMode === 'and') {
             $ids = array_map(fn($item) => $item->id, $tags);
             
-            $query->join('ratmd_bloghub_tags_posts', 'rainlab_blog_posts.id', '=', 'ratmd_bloghub_tags_posts.post_id')
-                ->whereIn('ratmd_bloghub_tags_posts.tag_id', array_map(fn($item) => $item->id, $tags))
-                ->groupBy('rainlab_blog_posts.id')
-                ->havingRaw('count(DISTINCT "ratmd_bloghub_tags_posts"."tag_id") = ?', [count($ids)]);
+            $query->join('forwn_bloghub_tags_posts', 'winter_blog_posts.id', '=', 'forwn_bloghub_tags_posts.post_id')
+                ->whereIn('forwn_bloghub_tags_posts.tag_id', array_map(fn($item) => $item->id, $tags))
+                ->groupBy('winter_blog_posts.id')
+                ->havingRaw('count(DISTINCT "forwn_bloghub_tags_posts"."tag_id") = ?', [count($ids)]);
         } else {
-            $query->whereHas('ratmd_bloghub_tags', function($query) use ($tags) {
+            $query->whereHas('forwn_bloghub_tags', function($query) use ($tags) {
                 if (is_array($tags)) {
-                    return $query->whereIn('ratmd_bloghub_tags.id', array_map(fn($item) => $item->id, $tags));
+                    return $query->whereIn('forwn_bloghub_tags.id', array_map(fn($item) => $item->id, $tags));
                 } else {
-                    return $query->where('ratmd_bloghub_tags.id', $tags->id);
+                    return $query->where('forwn_bloghub_tags.id', $tags->id);
                 }
             });
         }

@@ -3,19 +3,19 @@
 # ===================================
 
 # Model List Column configuration
-list: $/ratmd/bloghub/models/comment/columns.yaml
+list: $/forwintercms/bloghub/models/comment/columns.yaml
 
 # Displays the list filter
-filter: $/ratmd/bloghub/models/comment/scopes.yaml
+filter: $/forwintercms/bloghub/models/comment/scopes.yaml
 
 # Model Class name
-modelClass: RatMD\BlogHub\Models\Comment
+modelClass: ForWinterCms\BlogHub\Models\Comment
 
 # List Title
-title: ratmd.bloghub::lang.model.comments.manage
+title: forwintercms.bloghub::lang.model.comments.manage
 
 # Link URL for each record
-recordUrl: ratmd/bloghub/comments/update/:id
+recordUrl: forwintercms/bloghub/comments/update/:id
 
 # Message to display if the list is empty
 noRecordsMessage: backend::lang.list.no_records

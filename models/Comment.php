@@ -1,26 +1,26 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Models;
+namespace ForWinterCms\BlogHub\Models;
 
 use Lang;
 use Markdown;
 use Model;
-use RatMD\BlogHub\Models\Visitor;
+use ForWinterCms\BlogHub\Models\Visitor;
 
 /**
  * Comment Model
  */
 class Comment extends Model
 {
-    use \October\Rain\Database\Traits\SimpleTree;
-    use \October\Rain\Database\Traits\Validation;
+    use \Winter\Storm\Database\Traits\SimpleTree;
+    use \Winter\Storm\Database\Traits\Validation;
 
     /**
      * Table associated with this Model
      * 
      * @var string
      */
-    public $table = 'ratmd_bloghub_comments';
+    public $table = 'forwn_bloghub_comments';
 
     /**
      * Enable Modal Timestamps
@@ -128,10 +128,10 @@ class Comment extends Model
     public function getStatusOptions()
     {
         return [
-            'pending'   => Lang::get('ratmd.bloghub::lang.model.comments.statusPending'),
-            'approved'  => Lang::get('ratmd.bloghub::lang.model.comments.statusApproved'),
-            'rejected'  => Lang::get('ratmd.bloghub::lang.model.comments.statusRejected'),
-            'spam'      => Lang::get('ratmd.bloghub::lang.model.comments.statusSpam')
+            'pending'   => Lang::get('forwintercms.bloghub::lang.model.comments.statusPending'),
+            'approved'  => Lang::get('forwintercms.bloghub::lang.model.comments.statusApproved'),
+            'rejected'  => Lang::get('forwintercms.bloghub::lang.model.comments.statusRejected'),
+            'spam'      => Lang::get('forwintercms.bloghub::lang.model.comments.statusSpam')
         ];
     }
 
@@ -236,7 +236,7 @@ class Comment extends Model
                 return $this->authorable->username;
             }
         } else {
-            return trans('ratmd.bloghub::lang.model.comments.guest');
+            return trans('forwintercms.bloghub::lang.model.comments.guest');
         }
     }
 
@@ -261,12 +261,12 @@ class Comment extends Model
             $amount = intval($seconds / 60);
             $format = 'minutes';
         } else {
-            return trans('ratmd.bloghub::lang.model.comments.seconds_ago');
+            return trans('forwintercms.bloghub::lang.model.comments.seconds_ago');
         }
 
-        return trans('ratmd.bloghub::lang.model.comments.x_ago', [
+        return trans('forwintercms.bloghub::lang.model.comments.x_ago', [
             'amount' => $amount,
-            'format' => trans('ratmd.bloghub::lang.model.post.published_format_' . $format)
+            'format' => trans('forwintercms.bloghub::lang.model.post.published_format_' . $format)
         ]);
     }
 

@@ -1,12 +1,12 @@
-BlogHub - OctoberCMS Plugin
-===========================
+BlogHub - WinterCMS Plugin
+==========================
 
-**BlogHub** extends the [RainLab.Blog](https://octobercms.com/plugin/rainlab-blog) OctoberCMS plugin 
+**BlogHub** extends the [Winter.Blog](https://github.com/wintercms/wn-blog-plugin) WinterCMS plugin 
 with many necessary and helpful features such as Moderatable Comments, Promotable Tags, Custom Meta 
 Fields, additional Archives, basic Statistics, Views counter and more.
 
-This extension is especially designed for our own OctoberCMS templates, but can also be used by any 
-OctoberCMS user and developer, of course. Check out the documentation for all details.
+This extension is especially designed for our own WinterCMS templates, but can also be used by any 
+WinterCMS user and developer, of course. Check out the documentation for all details.
 
 
 Features
@@ -25,25 +25,25 @@ The following list just provides a slight overview, visit the documentation for 
 
 Important Notes
 ---------------
-1. The RatMD.BlogHub extension adds the possibility to use author archive pages. It is highly 
+1. The ForWinterCms.BlogHub extension adds the possibility to use author archive pages. It is highly 
 recommended using the "Author Slug" field for each backend user so that the login name - which would 
 be used instead - is not disclosed. You can also disable the use of the login name with the 
 `[bloghubBase]` component, as described in the documentation.
 
-2. The Blog comments currently requires to add the `{% framework %}` October-specific TWIG tag to 
+2. The Blog comments currently requires to add the `{% framework %}` Winter-specific TWIG tag to 
 your template layouts, when not already included. We're working on an AJAX-less / -optional 
 solution for a future update.
 
 
 Requirements
 -------------
-- OctoberCMS v2/v3 (tested with latest versions only)
+- WinterCMS v1.2
 - PHP 7.4+ / 8.0+
 - [Gregwar/Captcha](https://github.com/Gregwar/Captcha)
-- [RainLab.Blog](https://octobercms.com/plugin/rainlab-blog)
-- **Supports:** [RainLab.User](https://octobercms.com/plugin/rainlab-user) (optional)
-- **Supports:** [RainLab.Pages](https://octobercms.com/plugin/rainlab-pages) (optional)
-- **Supports:** [RainLab.Translate](https://octobercms.com/plugin/rainlab-translate) (optional)
+- [Winter.Blog](https://github.com/wintercms/wn-blog-plugin)
+- **Supports:** [RainLab.User](https://github.com/wintercms/wn-user-plugin) (optional)
+- **Supports:** [RainLab.Pages](https://github.com/wintercms/wn-pages-plugin) (optional)
+- **Supports:** [RainLab.Translate](https://github.com/wintercms/wn-translate-plugin) (optional)
 
 
 Copyright

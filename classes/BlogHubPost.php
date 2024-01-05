@@ -1,14 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Classes;
+namespace ForWinterCms\BlogHub\Classes;
 
 use Cms\Classes\Controller;
 use Illuminate\Support\Collection;
-use October\Contracts\Twig\CallsAnyMethod;
-use RainLab\Blog\Models\Post;
-use RatMD\BlogHub\Models\Visitor;
+use Winter\Blog\Models\Post;
+use ForWinterCms\BlogHub\Models\Visitor;
 
-class BlogHubPost implements CallsAnyMethod
+class BlogHubPost
 {
 
     /**
@@ -67,7 +66,7 @@ class BlogHubPost implements CallsAnyMethod
             } else {
                 $props = $props->getProperties();
             }
-            $model->ratmd_bloghub_tags->each(fn($tag) => $tag->setUrl($props['archiveTag'], $ctrl));
+            $model->forwn_bloghub_tags->each(fn($tag) => $tag->setUrl($props['archiveTag'], $ctrl));
         }
     }
 
@@ -106,8 +105,8 @@ class BlogHubPost implements CallsAnyMethod
      */
     public function getDetailMetaTitle(): string
     {
-        if (!empty($this->model->ratmd_bloghub_meta_title)) {
-            return $this->model->ratmd_bloghub_meta_title;
+        if (!empty($this->model->forwn_bloghub_meta_title)) {
+            return $this->model->forwn_bloghub_meta_title;
         } else {
             return $this->model->title;
         }
@@ -120,8 +119,8 @@ class BlogHubPost implements CallsAnyMethod
      */
     public function getDetailMetaDescription(): string
     {
-        if (!empty($this->model->ratmd_bloghub_meta_description)) {
-            return $this->model->ratmd_bloghub_meta_description;
+        if (!empty($this->model->forwn_bloghub_meta_description)) {
+            return $this->model->forwn_bloghub_meta_description;
         } else if(!empty($this->model->excerpt)) {
             return strip_tags($this->model->excerpt);
         } else {
@@ -150,11 +149,11 @@ class BlogHubPost implements CallsAnyMethod
             ];
         } else {
             if ($minutes === 0) {
-                return trans('ratmd.bloghub::lang.model.post.read_time_sec', [
+                return trans('forwintercms.bloghub::lang.model.post.read_time_sec', [
                     'sec' => $seconds
                 ]);
             } else {
-                return trans('ratmd.bloghub::lang.model.post.read_time', [
+                return trans('forwintercms.bloghub::lang.model.post.read_time', [
                     'min' => $minutes,
                     'sec' => $seconds
                 ]);
@@ -179,7 +178,7 @@ class BlogHubPost implements CallsAnyMethod
      */
     public function getComments()
     { 
-        return $this->model->ratmd_bloghub_comments;
+        return $this->model->forwn_bloghub_comments;
     }
 
     /**
@@ -189,7 +188,7 @@ class BlogHubPost implements CallsAnyMethod
      */
     public function getCommentsCount()
     { 
-        return $this->model->ratmd_bloghub_comments->count();
+        return $this->model->forwn_bloghub_comments->count();
     }
 
     /**
@@ -200,7 +199,7 @@ class BlogHubPost implements CallsAnyMethod
     public function getMeta(): array
     { 
         if (empty($this->metaCollection)) {
-            $this->metaCollection = $this->model->ratmd_bloghub_meta
+            $this->metaCollection = $this->model->forwn_bloghub_meta
                 ->mapWithKeys(fn ($item, $key) => [$item['name'] => $item['value']]);
         }
         return $this->metaCollection->all();
@@ -214,7 +213,7 @@ class BlogHubPost implements CallsAnyMethod
     public function getTags()
     {
         if (empty($this->tagCollection)) {
-            $this->tagCollection = $this->model->ratmd_bloghub_tags;
+            $this->tagCollection = $this->model->forwn_bloghub_tags;
 
             if (($ctrl = $this->getController()) !== null) {
                 $viewBag = $ctrl->getLayout()->getViewBag()->getProperties();
@@ -236,7 +235,7 @@ class BlogHubPost implements CallsAnyMethod
     public function getPromotedTags()
     { 
         if (empty($this->promotedTagCollection)) {
-            $this->promotedTagCollection = $this->model->ratmd_bloghub_tags->where('promote', '1');
+            $this->promotedTagCollection = $this->model->forwn_bloghub_tags->where('promote', '1');
 
             if (($ctrl = $this->getController()) !== null) {
                 $viewBag = $ctrl->getLayout()->getViewBag()->getProperties();
@@ -257,8 +256,8 @@ class BlogHubPost implements CallsAnyMethod
      */
     public function getViews()
     {
-        if (!empty($this->model->ratmd_bloghub_views)) {
-            return intval($this->model->ratmd_bloghub_views);
+        if (!empty($this->model->forwn_bloghub_views)) {
+            return intval($this->model->forwn_bloghub_views);
         } else {
             return 0;
         }
@@ -271,8 +270,8 @@ class BlogHubPost implements CallsAnyMethod
      */
     public function getUniqueViews()
     {
-        if (!empty($this->model->ratmd_bloghub_unique_views)) {
-            return intval($this->model->ratmd_bloghub_unique_views);
+        if (!empty($this->model->forwn_bloghub_unique_views)) {
+            return intval($this->model->forwn_bloghub_unique_views);
         } else {
             return 0;
         }
@@ -325,7 +324,7 @@ class BlogHubPost implements CallsAnyMethod
             $categories = $this->model->categories->map(fn($item) => $item->id)->all();
 
             $query->whereHas('categories', function($query) use ($categories) {
-                return $query->whereIn('rainlab_blog_categories.id', $categories);
+                return $query->whereIn('winter_blog_categories.id', $categories);
             });
         }
 
@@ -352,7 +351,7 @@ class BlogHubPost implements CallsAnyMethod
             $categories = $this->model->categories->map(fn($item) => $item->id)->all();
 
             $query->whereHas('categories', function($query) use ($categories) {
-                return $query->whereIn('rainlab_blog_categories.id', $categories);
+                return $query->whereIn('winter_blog_categories.id', $categories);
             });
         }
 
@@ -384,7 +383,7 @@ class BlogHubPost implements CallsAnyMethod
      */
     public function getRelated($limit = 5, $exclude = [])
     {
-        $tags = $this->model->ratmd_bloghub_tags->map(fn ($item) => $item->id)->all();
+        $tags = $this->model->forwn_bloghub_tags->map(fn ($item) => $item->id)->all();
         $categories = $this->model->categories->map(fn ($item) => $item->id)->all();
 
         // Exclude
@@ -396,12 +395,12 @@ class BlogHubPost implements CallsAnyMethod
         $excludes[] = $this->model->id;
 
         // Query
-        $query = Post::with(['categories', 'featured_images', 'ratmd_bloghub_tags'])
+        $query = Post::with(['categories', 'featured_images', 'forwn_bloghub_tags'])
             ->whereHas('categories', function($query) use ($categories) {
-                return $query->whereIn('rainlab_blog_categories.id', $categories);
+                return $query->whereIn('winter_blog_categories.id', $categories);
             })
-            ->whereHas('ratmd_bloghub_tags', function($query) use ($tags) {
-                return $query->whereIn('ratmd_bloghub_tags.id', $tags);
+            ->whereHas('forwn_bloghub_tags', function($query) use ($tags) {
+                return $query->whereIn('forwn_bloghub_tags.id', $tags);
             })
             ->limit($limit);
         
@@ -428,7 +427,7 @@ class BlogHubPost implements CallsAnyMethod
         $excludes[] = $this->model->id;
 
         // Query
-        $query = Post::with(['categories', 'featured_images', 'ratmd_bloghub_tags'])->limit($limit);
+        $query = Post::with(['categories', 'featured_images', 'forwn_bloghub_tags'])->limit($limit);
 
         // Return Result
         $result = $query->get()->filter(fn($item) => !in_array($item['id'], $excludes))->all();

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
-use RatMD\BlogHub\Models\Tag as TagModel;
+use ForWinterCms\BlogHub\Models\Tag as TagModel;
 
 class Tags extends ComponentBase
 {
@@ -28,8 +28,8 @@ class Tags extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'          => 'ratmd.bloghub::lang.components.tags.label',
-            'description'   => 'ratmd.bloghub::lang.components.tags.comment'
+            'name'          => 'forwintercms.bloghub::lang.components.tags.label',
+            'description'   => 'forwintercms.bloghub::lang.components.tags.comment'
         ];
     }
 
@@ -42,24 +42,24 @@ class Tags extends ComponentBase
     {
         return [
             'tagPage' => [
-                'title'             => 'ratmd.bloghub::lang.components.tags.tags_page',
-                'description'       => 'ratmd.bloghub::lang.components.tags.tags_page_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.tags.tags_page',
+                'description'       => 'forwintercms.bloghub::lang.components.tags.tags_page_comment',
                 'type'              => 'dropdown',
                 'default'           => 'blog/tag',
-                'group'             => 'rainlab.blog::lang.settings.group_links',
+                'group'             => 'winter.blog::lang.settings.group_links',
             ],
             'onlyPromoted' => [
-                'title'             => 'ratmd.bloghub::lang.components.tags.only_promoted',
-                'description'       => 'ratmd.bloghub::lang.components.tags.only_promoted_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.tags.only_promoted',
+                'description'       => 'forwintercms.bloghub::lang.components.tags.only_promoted_comment',
                 'type'              => 'checkbox',
                 'default'           => '0'
             ],
             'amount' => [
-                'title'             => 'ratmd.bloghub::lang.components.tags.amount',
-                'description'       => 'ratmd.bloghub::lang.components.tags.amount_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.tags.amount',
+                'description'       => 'forwintercms.bloghub::lang.components.tags.amount_comment',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'ratmd.bloghub::lang.components.tags.amount_validation',
+                'validationMessage' => 'forwintercms.bloghub::lang.components.tags.amount_validation',
                 'default'           => '5',
             ]
         ];

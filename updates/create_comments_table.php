@@ -1,8 +1,8 @@
-<?php namespace RatMD\BlogHub\Updates;
+<?php namespace ForWinterCms\BlogHub\Updates;
 
 use Schema;
-use October\Rain\Database\Schema\Blueprint;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Schema\Blueprint;
+use Winter\Storm\Database\Updates\Migration;
 use System\Classes\PluginManager;
 
 /**
@@ -10,17 +10,16 @@ use System\Classes\PluginManager;
  */
 class CreateCommentsTable extends Migration
 {
-
     /**
      * @inheritDoc
      */
     public function up()
     {
-        if (!PluginManager::instance()->hasPlugin('RainLab.Blog')) {
+        if (!PluginManager::instance()->hasPlugin('Winter.Blog')) {
             return;
         }
 
-        Schema::create('ratmd_bloghub_comments', function (Blueprint $table) {
+        Schema::create('forwn_bloghub_comments', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
@@ -37,18 +36,18 @@ class CreateCommentsTable extends Migration
             $table->string('author_uid')->nullable();
             $table->integer('parent_id')->unsigned()->nullable();
             $table->integer('author_id')->unsigned()->nullable();
-            $table->integer('author_table')->unsigned()->nullable();
+            $table->string('author_table', 255)->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('rejected_at')->nullable();
             $table->timestamps();
             
-            $table->foreign('post_id')->references('id')->on('rainlab_blog_posts')->onDelete('cascade');
-            $table->foreign('parent_id')->references('id')->on('ratmd_bloghub_comments')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('winter_blog_posts')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('forwn_bloghub_comments')->onDelete('cascade');
         });
 
-        Schema::table('rainlab_blog_posts', function (Blueprint $table) {
-            $table->string('ratmd_bloghub_comment_mode', 32)->default('open');
-            $table->boolean('ratmd_bloghub_comment_visible')->default(true);
+        Schema::table('winter_blog_posts', function (Blueprint $table) {
+            $table->string('forwn_bloghub_comment_mode', 32)->default('open');
+            $table->boolean('forwn_bloghub_comment_visible')->default(true);
         });
     }
 
@@ -57,22 +56,21 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratmd_bloghub_comments');
+        Schema::dropIfExists('forwn_bloghub_comments');
 
         if (method_exists(Schema::class, 'dropColumns')) {
-            Schema::dropColumns('rainlab_blog_posts', ['ratmd_bloghub_comment_mode', 'ratmd_bloghub_comment_visible']);
+            Schema::dropColumns('winter_blog_posts', ['forwn_bloghub_comment_mode', 'forwn_bloghub_comment_visible']);
         } else {
-            Schema::table('rainlab_blog_posts', function (Blueprint $table) {
-                if (Schema::hasColumn('rainlab_blog_posts', 'ratmd_bloghub_comment_mode')) {
-                    $table->dropColumn('ratmd_bloghub_comment_mode');
+            Schema::table('winter_blog_posts', function (Blueprint $table) {
+                if (Schema::hasColumn('winter_blog_posts', 'forwn_bloghub_comment_mode')) {
+                    $table->dropColumn('forwn_bloghub_comment_mode');
                 }
             });
-            Schema::table('rainlab_blog_posts', function (Blueprint $table) {
-                if (Schema::hasColumn('rainlab_blog_posts', 'ratmd_bloghub_comment_visible')) {
-                    $table->dropColumn('ratmd_bloghub_comment_visible');
+            Schema::table('winter_blog_posts', function (Blueprint $table) {
+                if (Schema::hasColumn('winter_blog_posts', 'forwn_bloghub_comment_visible')) {
+                    $table->dropColumn('forwn_bloghub_comment_visible');
                 }
             });
         }
     }
-
 }

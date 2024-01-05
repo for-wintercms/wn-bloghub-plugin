@@ -3,7 +3,7 @@
 return [
     'plugin' => [
         'name' => 'BlogHub von rat.md',
-        'description' => 'Erweitert RainLab.Blog mit Kommentaren, Schlagwörtern, Meta-Feldern, Archiven, Statistiken, Klickzähler und mehr.',
+        'description' => 'Erweitert Winter.Blog mit Kommentaren, Schlagwörtern, Meta-Feldern, Archiven, Statistiken, Klickzähler und mehr.',
     ],
     
 

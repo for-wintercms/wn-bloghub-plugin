@@ -12,14 +12,14 @@
                     </svg>
                 </div>
                 <div class="flex-fill">
-                    <?= Lang::get('ratmd.bloghub::lang.frontend.comments.by') ?> <b><?= $comment->display_name; ?></b>
-                    <?= Lang::get('ratmd.bloghub::lang.frontend.comments.on') ?> <?= $comment->created_at->format('M j, Y') ?>
+                    <?= Lang::get('forwintercms.bloghub::lang.frontend.comments.by') ?> <b><?= $comment->display_name; ?></b>
+                    <?= Lang::get('forwintercms.bloghub::lang.frontend.comments.on') ?> <?= $comment->created_at->format('M j, Y') ?>
                 </div>
             </button>
         <?php endforeach ?>
     </div>
 <?php else: ?>
     <div class="align-self-center p-3 text-center">
-        <?= Lang::get('ratmd.bloghub::lang.model.comments.no_further_comments') ?>
+        <?= Lang::get('forwintercms.bloghub::lang.model.comments.no_further_comments') ?>
     </div>
 <?php endif; ?>

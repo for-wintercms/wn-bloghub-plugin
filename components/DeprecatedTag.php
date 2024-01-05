@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
 use Log;
 
@@ -15,8 +15,8 @@ class DeprecatedTag extends PostsByTag
     public function componentDetails()
     {
         return [
-            'name'          => 'ratmd.bloghub::lang.components.deprecated.tags_label',
-            'description'   => 'ratmd.bloghub::lang.components.deprecated.tags_comment'
+            'name'          => 'forwintercms.bloghub::lang.components.deprecated.tags_label',
+            'description'   => 'forwintercms.bloghub::lang.components.deprecated.tags_comment'
         ];
     }
 

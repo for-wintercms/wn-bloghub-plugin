@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\ReportWidgets;
+namespace ForWinterCms\BlogHub\ReportWidgets;
 
 use Backend\Classes\ReportWidgetBase;
 use Cms\Classes\Controller;
 use Cms\Classes\Page;
 use Cms\Classes\Theme;
 use Lang;
-use RainLab\Blog\Models\Post;
+use Winter\Blog\Models\Post;
 use System\Classes\UpdateManager;
 
 class PostsList extends ReportWidgetBase
@@ -31,14 +31,14 @@ class PostsList extends ReportWidgetBase
     {
         return [
             'postPage' => [
-                'title'         => 'rainlab.blog::lang.settings.posts_post',
-                'description'   => 'rainlab.blog::lang.settings.posts_post_description',
+                'title'         => 'winter.blog::lang.settings.posts_post',
+                'description'   => 'winter.blog::lang.settings.posts_post_description',
                 'type'          => 'dropdown',
                 'default'       => 'blog/post',
             ],
             'defaultOrder' => [
-                'title'         => 'ratmd.bloghub::lang.components.post.default_order',
-                'description'   => 'ratmd.bloghub::lang.components.post.default_order_comment',
+                'title'         => 'forwintercms.bloghub::lang.components.post.default_order',
+                'description'   => 'forwintercms.bloghub::lang.components.post.default_order_comment',
                 'type'          => 'dropdown',
                 'default'       => 'blog/post',
             ]
@@ -63,9 +63,9 @@ class PostsList extends ReportWidgetBase
     public function getDefaultOrderOptions()
     {
         return [
-            'by_published' => Lang::get('ratmd.bloghub::lang.components.post.by_published'),
-            'by_views' => Lang::get('ratmd.bloghub::lang.components.post.by_views'),
-            'by_visitors' => Lang::get('ratmd.bloghub::lang.components.post.by_visitors')
+            'by_published' => Lang::get('forwintercms.bloghub::lang.components.post.by_published'),
+            'by_views' => Lang::get('forwintercms.bloghub::lang.components.post.by_views'),
+            'by_visitors' => Lang::get('forwintercms.bloghub::lang.components.post.by_visitors')
         ];
     }
 
@@ -78,7 +78,7 @@ class PostsList extends ReportWidgetBase
     protected function loadAssets()
     {
         if (version_compare(UpdateManager::instance()->getCurrentVersion(), '3.0.0', '<')) {
-            $this->addCss('/plugins/ratmd/bloghub/assets/css/widget-octoberv2.css');
+            $this->addCss('/plugins/forwintercms/bloghub/assets/css/widget-octoberv2.css');
         }
     }
 
@@ -99,13 +99,13 @@ class PostsList extends ReportWidgetBase
         } else if ($order === 'by_views') {
             $posts = $query
                 ->where('published', '1')
-                ->orderBy('ratmd_bloghub_views', 'DESC')
+                ->orderBy('forwn_bloghub_views', 'DESC')
                 ->orderBy('published_at', 'DESC')
                 ->get();
         } else if ($order === 'by_visitors') {
             $posts = $query
                 ->where('published', '1')
-                ->orderBy('ratmd_bloghub_unique_views', 'DESC')
+                ->orderBy('forwn_bloghub_unique_views', 'DESC')
                 ->orderBy('published_at', 'DESC')
                 ->get();
         } else {

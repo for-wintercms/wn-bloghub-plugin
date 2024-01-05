@@ -1,8 +1,8 @@
 <?php if ($comment): ?>
     <div class="comment-header">
-        <span><?= $comment->parent ? Lang::get('ratmd.bloghub::lang.frontend.comments.reply_by'): Lang::get('ratmd.bloghub::lang.frontend.comments.comment_by') ?></span>
+        <span><?= $comment->parent ? Lang::get('forwintercms.bloghub::lang.frontend.comments.reply_by'): Lang::get('forwintercms.bloghub::lang.frontend.comments.comment_by') ?></span>
         <b><?= $comment->display_name ?></b>
-        <span><?= Lang::get('ratmd.bloghub::lang.frontend.comments.on') ?></span>
+        <span><?= Lang::get('forwintercms.bloghub::lang.frontend.comments.on') ?></span>
         <?php if ($comment->post->url): ?>
             <a href="<?= $comment->post->url ?>" target="_blank"><b><?= $comment->post->title ?></b></a>
         <?php else: ?>
@@ -25,26 +25,26 @@
                     data-request-data="comment_id: '<?= $comment->id ?>', status: 'spam'" 
                     data-request-success="(typeof oc === 'undefined'? $.oc : oc)['flashMsg']({ type: 'success', 'message': data.status });Object.entries(data.counts).map(([t,c]) => document.querySelector(`[data-counter='${t}']`).innerText=c)"
                     data-request-error="(typeof oc === 'undefined'? $.oc : oc)['flashMsg']({ type: 'error', 'message': data.result })"
-                    class="btn btn-sm btn-danger"><?= Lang::get('ratmd.bloghub::lang.frontend.comments.spam') ?></button>
+                    class="btn btn-sm btn-danger"><?= Lang::get('forwintercms.bloghub::lang.frontend.comments.spam') ?></button>
                 <button 
                     type="button" 
                     data-request="onChangeStatus" 
                     data-request-data="comment_id: '<?= $comment->id ?>', status: 'reject'" 
                     data-request-success="(typeof oc === 'undefined'? $.oc : oc)['flashMsg']({ type: 'success', 'message': data.status });Object.entries(data.counts).map(([t,c]) => document.querySelector(`[data-counter='${t}']`).innerText=c)"
                     data-request-error="(typeof oc === 'undefined'? $.oc : oc)['flashMsg']({ type: 'error', 'message': data.result })"
-                    class="btn btn-sm btn-secondary"><?= Lang::get('ratmd.bloghub::lang.frontend.comments.reject') ?></button>
+                    class="btn btn-sm btn-secondary"><?= Lang::get('forwintercms.bloghub::lang.frontend.comments.reject') ?></button>
                 <button 
                     type="button" 
                     data-request="onChangeStatus" 
                     data-request-data="comment_id: '<?= $comment->id ?>', status: 'approve'" 
                     data-request-success="(typeof oc === 'undefined'? $.oc : oc)['flashMsg']({ type: 'success', 'message': data.status });Object.entries(data.counts).map(([t,c]) => document.querySelector(`[data-counter='${t}']`).innerText=c)"
                     data-request-error="(typeof oc === 'undefined'? $.oc : oc)['flashMsg']({ type: 'error', 'message': data.result })"
-                    class="btn btn-sm btn-primary ms-3"><?= Lang::get('ratmd.bloghub::lang.frontend.comments.approve') ?></button>
+                    class="btn btn-sm btn-primary ms-3"><?= Lang::get('forwintercms.bloghub::lang.frontend.comments.approve') ?></button>
             <?php endif; ?>
         </div>
     </div>
 <?php else: ?>
     <div class="align-self-center">
-        <?= Lang::get('ratmd.bloghub::lang.model.comments.no_comment') ?>
+        <?= Lang::get('forwintercms.bloghub::lang.model.comments.no_comment') ?>
     </div>
 <?php endif; ?>

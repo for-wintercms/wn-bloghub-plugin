@@ -1,4 +1,4 @@
-# BlogHub v1.3.0 - Documentation
+# BlogHub v1.0.0 - Documentation
 
 Welcome on the BlogHub documentation page.
 
@@ -16,22 +16,22 @@ Welcome on the BlogHub documentation page.
 13. Dashboard Widgets
 
 ## Requirements
-- OctoberCMS v2/v3 (tested with latest version only)
+- WinterCMS v1.2.4+
 - PHP 7.4+ / 8.0+
-- RainLab.Blog
-- **Supports:** RainLab.User (optional)
-- **Supports:** RainLab.Pages (optional)
-- **Supports:** RainLab.Translate (optional)
+- Winter.Blog
+- **Supports:** Winter.User (optional)
+- **Supports:** Winter.Pages (optional)
+- **Supports:** Winter.Translate (optional)
 
-The optional plugins, as shown on the bottom of the list above, just extends existing or provides additional features and functions for the BlogHub plugin, but aren't required of course. The only required extension is **RainLab.Blog** itself.
+The optional plugins, as shown on the bottom of the list above, just extends existing or provides additional features and functions for the BlogHub plugin, but aren't required of course. The only required extension is **Winter.Blog** itself.
 
 ## Overview
-Our **BlogHub** extension adds a lot of functionallity to RainLab's Blog extension, many of them are especially designed for the use on our own templates - but can be used and implemented by any OctoberCMS user, of course. This documentation just describes the technical components and just shows a few small examples. Thus, you should be familiar with the default OctoberCMS behaviour and development before starting here.
+Our **BlogHub** extension adds a lot of functionallity to WinterCMS Blog extension, many of them are especially designed for the use on our own templates - but can be used and implemented by any WinterCMS user, of course. This documentation just describes the technical components and just shows a few small examples. Thus, you should be familiar with the default WinterCMS behaviour and development before starting here.
 
 However, the following list shows all available features as in Version 1.3.0:
 
 - Blog Comments
-	- Moderatable Post Comments (compatible with RainLab.User, not required)
+	- Moderatable Post Comments (compatible with Winter.User, not required)
 	- Multi-Depth Replies (Supports nested or simple view)
 	- Like / Dislike counter and Favourite switch
 	- Honeypot and Captcha field (last is based on Gregwar Captcha)
@@ -60,12 +60,12 @@ However, the following list shows all available features as in Version 1.3.0:
 - Additional Menus
 	- *coming soon*
 - Additional Permissions
-	- `ratmd.bloghub.comments`
-	- `ratmd.bloghub.comments.access_comments_settings`
-	- `ratmd.bloghub.comments.moderate_comments`
-	- `ratmd.bloghub.comments.delete_coments`
-	- `ratmd.bloghub.tags`
-	- `ratmd.bloghub.tags.promoted`
+	- `forwn.bloghub.comments`
+	- `forwn.bloghub.comments.access_comments_settings`
+	- `forwn.bloghub.comments.moderate_comments`
+	- `forwn.bloghub.comments.delete_coments`
+	- `forwn.bloghub.tags`
+	- `forwn.bloghub.tags.promoted`
 - Extended Post Model
 	- `post.bloghub.detail_meta_title` - Generated Meta title
 	- `post.bloghub.detail_meta_description` - Generated Meta description
@@ -110,7 +110,7 @@ Version 1.3.0 of our **BlogHub** plugin adds a new comment environment, includin
 
 The comments system distinguish between guests, frontend users and backend users. Guests are required to fill out the username, email address, terms of service box and are controlled by the Honeypot and Captcha fields (when enabled). Logged-In Users can directly enter the comment title and body, are not controlled by any Honeypot or Captcha system and comments can also be set to be approved directly.
 
-However, backend users are able to view and moderate pending comments on the single post page. Post authors do also have the ability to favorite comments, which pins or highlights them on the respective comments list. Of course, the moderation can also be done on October's backend page - as long as the respective permissions are set.
+However, backend users are able to view and moderate pending comments on the single post page. Post authors do also have the ability to favorite comments, which pins or highlights them on the respective comments list. Of course, the moderation can also be done on Winter's backend page - as long as the respective permissions are set.
 
 Comments can either be accessed directly on the post model, using `bloghub.comments` or `bloghub.comments_count`  or by using one of the available template components, as described below.
 
@@ -125,7 +125,7 @@ Theme-related meta fields must be set in the template's `theme.yaml` file, using
 ```yaml
 # Your Theme Data
 
-ratmd.bloghub:
+forwn.bloghub:
 	post:
 		# Your Meta Data
 ```
@@ -139,10 +139,10 @@ BlogHub provides additional blog tags, which can be created and assigned on the 
 The assigned Tags can either be accessed directly on the post model using `bloghub.tags` or by using one of the available template components, as described below. One of the components allows to build a tag archive page with support for multipe tag queries. When enabled you can show posts which must contain all tags (ex. `/blog/tag/tag1+tag2`) or which must contain either of the provided tags (ex. `/blog/tag/tag1,tag2`).
 
 ## Template Components
-The **BlogHub** OctoberCMS plugin provides the following components.
+The **BlogHub** WinterCMS plugin provides the following components.
 
 ### [bloghubBase]
-The `[bloghubBase]` component SHOULD be set on all CMS layouts, which are or can be used to display the blog posts, since it provides the basic configuration for all bloghub and RainLab.Blog components (such as the single archive pages). When this component is not set, the default values (as shown below) will be used, when not otherwise changed.
+The `[bloghubBase]` component SHOULD be set on all CMS layouts, which are or can be used to display the blog posts, since it provides the basic configuration for all bloghub and Winter.Blog components (such as the single archive pages). When this component is not set, the default values (as shown below) will be used, when not otherwise changed.
 
 This component does NOT provide a default template, since it is only be used to configure the exisiting and provided components only. Using `{% component 'bloghubBase' %}` will result in an error.
 
@@ -194,7 +194,7 @@ This component adds the following page variables.
 The `bloghub_config` variable contains all configured arguments as described above.
 
 ### [bloghubPostsByAuthor]
-This component uses RainLab's `[blogPosts]` component as base class, thus all options below, except for `authorFilter` are exactly the same as on the referenced class. Check out RainLab's extension for more details about the single arguments.
+This component uses Winter's `[blogPosts]` component as base class, thus all options below, except for `authorFilter` are exactly the same as on the referenced class. Check out Winter's extension for more details about the single arguments.
 
 #### Component Arguments
 This component provides the following arguments.
@@ -225,10 +225,10 @@ This component adds the following page variables.
 This component injects the `author` page variable to the page object, which points to the BackendUser model. The **BlogHub** plugin extends the BackendUser model with a few additional dynamic properties, check below at "Extended User Model" for more details.
 
 ### [bloghubPostsByCommentCount]
-This component uses RainLab's `[blogPosts]` component as base class, thus all options below, and does not extend the existing arguments as on the references class. It only removed the `sortOrder` option and injects the own sorting method. Check out RainLab's extension for more details about the single arguments.
+This component uses Winter's `[blogPosts]` component as base class, thus all options below, and does not extend the existing arguments as on the references class. It only removed the `sortOrder` option and injects the own sorting method. Check out Winter's extension for more details about the single arguments.
 
 #### Component Arguments
-This component does not provide any additional arguments, check out RainLab.Blog for more details about the existing arguments below.
+This component does not provide any additional arguments, check out Winter.Blog for more details about the existing arguments below.
 
 ```ini
 [bloghubPostsByCommentCount]
@@ -246,7 +246,7 @@ exceptCategories =
 This component does not add an additional page variable.
 
 ### [bloghubPostsByDate]
-This component uses RainLab's `[blogPosts]` component as base class, thus all options below, except for `dateFilter` are exactly the same as on the referenced class. Check out RainLab's extension for more details about the single arguments.
+This component uses Winter's `[blogPosts]` component as base class, thus all options below, except for `dateFilter` are exactly the same as on the referenced class. Check out Winter's extension for more details about the single arguments.
 
 #### Component Arguments
 This component provides the following arguments.
@@ -305,7 +305,7 @@ The `dateFormat` page variable contains a formatted date/time string, depending 
 It is currently NOT possible to use own date/time formats for the single date types.
 
 ### [bloghubPostsByTag]
-This component uses RainLab's `[blogPosts]` component as base class, thus all options below, except for `tagFilter` are exactly the same as on the referenced class. Check out RainLab's extension for more details about the single arguments.
+This component uses Winter's `[blogPosts]` component as base class, thus all options below, except for `tagFilter` are exactly the same as on the referenced class. Check out Winter's extension for more details about the single arguments.
 
 #### Component Arguments
 This component provides the following arguments.
@@ -497,10 +497,10 @@ The current user model or null if the current user is not logged in.
 A boolean state if the current user is not logged in.
 
 ##### Variable: `currentUserIsFrontend`
-A boolean state if the current user is a frontend user of the RainLab.User plugin.
+A boolean state if the current user is a frontend user of the Winter.User plugin.
 
 ##### Variable: `currentUserIsBackend`
-A boolean state if the current user is a backend OctoberCMS user.
+A boolean state if the current user is a backend WinterCMS user.
 
 ##### Variable: `isLoggedIn`
 A boolean state if the current user is logged in (either on the frontend or backend authentication method).
@@ -518,7 +518,7 @@ A boolean state if the current user can favourite comments, depending on the use
 A boolean state if the current user can write comments or replies, depending on the used configuration.
 
 ##### Variable: `currentUserCanModerate`
-A boolean state if the current user can moderate pending comments, depending on the used configuration and if the current user is a backend OctoberCMS user.
+A boolean state if the current user can moderate pending comments, depending on the used configuration and if the current user is a backend WinterCMS user.
 
 ##### Variable: `showCommentFormTitle`
 A boolean state if the comment title form field should be visisble or not, depending on the used configuration.
@@ -575,28 +575,28 @@ This component adds the following page variables.
 
 
 ## Additional Permissions
-The **BlogHub** OctoberCMS plugin adds the following permissions.
+The **BlogHub** WinterCMS plugin adds the following permissions.
 
-### `ratmd.bloghub.comments`
-Allows to access the `Comments` side menu on the RainLab.Blog main menu. The `Comments` menu contains access to the comments moderation. However, this permission is NOT required to access the BlogHub and BlogHub / Comments settings page, which requires the default RainLab permission: `rainlab.blog.manage_settings`.
+### `forwn.bloghub.comments`
+Allows to access the `Comments` side menu on the Winter.Blog main menu. The `Comments` menu contains access to the comments moderation. However, this permission is NOT required to access the BlogHub and BlogHub / Comments settings page, which requires the default Winter permission: `winter.blog.manage_settings`.
 
-### `ratmd.bloghub.comments.access_comments_settings`
+### `forwn.bloghub.comments.access_comments_settings`
 This permissions allows to get access to the post-related comment configuration tab. This tab contains the options to change the visibility of the whole comment section as well as to change the comment mode for the respective post only.
 
-### `ratmd.bloghub.comments.moderate_comments`
+### `forwn.bloghub.comments.moderate_comments`
 This permission allows to moderate comments on the backend as well as on the frontend page. The respective user can approve, reject or mark pending comments as spam. While the forntend does only allow to approve and reject pending comments, the backend also supports to change the comment status of any comment.
 
-### `ratmd.bloghub.comments.delete_coments`
+### `forwn.bloghub.comments.delete_coments`
 This permission allows to delete comments of any state and is an extension to the `moderate_comments` permission above.
 
-### `ratmd.bloghub.tags`
-This permission allows to access the `Tags` side menu on the RainLab.Blog main menu as well as the tags relation field on the single post backend page. The `Tags` menu contains the management environment for all available tags.
+### `forwn.bloghub.tags`
+This permission allows to access the `Tags` side menu on the Winter.Blog main menu as well as the tags relation field on the single post backend page. The `Tags` menu contains the management environment for all available tags.
 
-### `ratmd.bloghub.tags.promoted`
+### `forwn.bloghub.tags.promoted`
 This permission allows to set the `Promote` flag on the single tags using the additional `Tags` menu under `Blog`. Since Promoted Tags are may shown different - depending on the theme - this flag has received his own permission additionally to the `tags` one as shown above.
 
 ## Extended Post Model
-The **BlogHub** OctoberCMS plugin extends RainLab's Blog Post class model with the following additional properties and methods.
+The **BlogHub** WinterCMS plugin extends WinterCMS Blog Post class model with the following additional properties and methods.
 
 ### `post.bloghub.detail_meta_title`
 **Work in Progress** - This property returns the post title itself at the moment. However, we're working on additional SEO abilities and functions to be released in a future update.
@@ -713,19 +713,19 @@ Returns a collection of related blog posts, excluding the current post model. Yo
 Returns a collection of random blog posts, excluding the current post model. You can change the number of posts with the first parameter and you can exclude one or more posts by passing their IDs as second parameter.
 
 ## Extended User Model
-The **BlogHub** OctoberCMS plugin extends the backend user class model with the following additional properties and methods. You can receive the author of the current post model using either `post.user` or the bloghub alias `post.bloghub.author`.
+The **BlogHub** WinterCMS plugin extends the backend user class model with the following additional properties and methods. You can receive the author of the current post model using either `post.user` or the bloghub alias `post.bloghub.author`.
 
 ### `post.user.bloghub.url`
 Returns the full author archive URL of the current user, as long as the author page is set using the `[bloghubBase]` component, as described above.
 
 ### `post.user.bloghub.slug`
-Returns the plain author URL slug of the current user, which is either the `ratmd_bloghub_author_slug` column or the `login` name if the first is not set.
+Returns the plain author URL slug of the current user, which is either the `forwn_bloghub_author_slug` column or the `login` name if the first is not set.
 
 ### `post.user.bloghub.display`
-Returns the display name of the current user. The display name is either the `ratmd_bloghub_display_name` column, the `first_name last_name` columns or the titlized login name.
+Returns the display name of the current user. The display name is either the `forwn_bloghub_display_name` column, the `first_name last_name` columns or the titlized login name.
 
 ### `post.user.bloghub.about` 
-Returns the `ratmd_bloghub_about_me` column of the current user.
+Returns the `forwn_bloghub_about_me` column of the current user.
 
 ### `post.user.bloghub.count`
 Returns the number of published posts of the current user.

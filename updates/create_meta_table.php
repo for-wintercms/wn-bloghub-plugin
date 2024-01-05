@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Updates;
+namespace ForWinterCms\BlogHub\Updates;
 
 use Schema;
 use Illuminate\Database\Schema\Blueprint;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 use System\Classes\PluginManager;
 
 /**
@@ -12,23 +12,22 @@ use System\Classes\PluginManager;
  */
 class CreateMetaTable extends Migration
 {
-
     /**
      * @inheritDoc
      */
     public function up()
     {
-        if (!PluginManager::instance()->hasPlugin('RainLab.Blog')) {
+        if (!PluginManager::instance()->hasPlugin('Winter.Blog')) {
             return;
         }
 
-        Schema::create('ratmd_bloghub_meta', function(Blueprint $table) {
+        Schema::create('forwn_bloghub_meta', function(Blueprint $table) {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
             $table->string('name', 64);
             $table->text('value')->nullable();
-            $table->integer('metable_id')->unsigned();
+            $table->integer('metable_id')->nullable();
             $table->string('metable_type', 64);
             $table->timestamps();
 
@@ -41,7 +40,6 @@ class CreateMetaTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ratmd_bloghub_meta');
+        Schema::dropIfExists('forwn_bloghub_meta');
     }
-    
 }

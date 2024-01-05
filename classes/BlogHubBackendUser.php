@@ -1,13 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Classes;
+namespace ForWinterCms\BlogHub\Classes;
 
 use Backend\Models\User;
 use Cms\Classes\Controller;
-use October\Contracts\Twig\CallsAnyMethod;
-use RainLab\Blog\Models\Post;
+use Winter\Blog\Models\Post;
 
-class BlogHubBackendUser implements CallsAnyMethod
+class BlogHubBackendUser
 {
 
     /**
@@ -80,10 +79,10 @@ class BlogHubBackendUser implements CallsAnyMethod
      */
     public function getSlug()
     {
-        if (empty($this->model->ratmd_bloghub_author_slug)) {
+        if (empty($this->model->forwn_bloghub_author_slug)) {
             return $this->model->login;
         } else {
-            return $this->model->ratmd_bloghub_author_slug;
+            return $this->model->forwn_bloghub_author_slug;
         }
     }
 
@@ -94,8 +93,8 @@ class BlogHubBackendUser implements CallsAnyMethod
      */
     public function getDisplayName()
     {
-        if (!empty($this->model->ratmd_bloghub_display_name)) {
-            return $this->model->ratmd_bloghub_display_name;
+        if (!empty($this->model->forwn_bloghub_display_name)) {
+            return $this->model->forwn_bloghub_display_name;
         }
         
         $name = '';
@@ -125,7 +124,7 @@ class BlogHubBackendUser implements CallsAnyMethod
      */
     public function getAboutMe()
     {
-        return $this->model->ratmd_bloghub_about_me;
+        return $this->model->forwn_bloghub_about_me;
     }
 
     /**

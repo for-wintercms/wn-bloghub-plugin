@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
 use AjaxException;
 use Lang;
@@ -11,10 +11,10 @@ use Session;
 use Backend\Facades\BackendAuth;
 use Cms\Classes\ComponentBase;
 use Illuminate\Pagination\LengthAwarePaginator;
-use RainLab\Blog\Models\Post;
-use RatMD\BlogHub\Models\BlogHubSettings;
-use RatMD\BlogHub\Models\Comment;
-use RatMD\BlogHub\Models\Visitor;
+use Winter\Blog\Models\Post;
+use ForWinterCms\BlogHub\Models\BlogHubSettings;
+use ForWinterCms\BlogHub\Models\Comment;
+use ForWinterCms\BlogHub\Models\Visitor;
 use System\Classes\PluginManager;
 use System\Classes\UpdateManager;
 
@@ -43,8 +43,8 @@ class CommentSection extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'ratmd.bloghub::lang.components.comments_section.label',
-            'description' => 'ratmd.bloghub::lang.components.comments_section.comment'
+            'name'        => 'forwintercms.bloghub::lang.components.comments_section.label',
+            'description' => 'forwintercms.bloghub::lang.components.comments_section.comment'
         ];
     }
 
@@ -57,70 +57,70 @@ class CommentSection extends ComponentBase
     {
         return [
             'postSlug' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.post_slug',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.post_slug_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.post_slug',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.post_slug_comment',
                 'type'              => 'dropdown',
                 'default'           => '',
             ],
             'commentsPerPage' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.comments_per_page',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.comments_per_page',
                 'type'              => 'string',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'rainlab.blog::lang.settings.posts_per_page_validation',
+                'validationMessage' => 'winter.blog::lang.settings.posts_per_page_validation',
                 'default'           => '10',
             ],
             'pageNumber' => [
-                'title'             => 'rainlab.blog::lang.settings.posts_pagination',
-                'description'       => 'rainlab.blog::lang.settings.posts_pagination_description',
+                'title'             => 'winter.blog::lang.settings.posts_pagination',
+                'description'       => 'winter.blog::lang.settings.posts_pagination_description',
                 'type'              => 'string',
                 'default'           => '',
             ],
             'sortOrder' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.comments_order',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.comments_order_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.comments_order',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.comments_order_comment',
                 'type'              => 'dropdown',
                 'default'           => 'created_at desc',
             ],
             'commentHierarchy' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.comments_hierarchy',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.comments_hierarchy_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.comments_hierarchy',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.comments_hierarchy_comment',
                 'type'              => 'checkbox',
                 'default'           => '1'
             ],
             'commentsAnchor' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.comments_anchor',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.comments_anchor_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.comments_anchor',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.comments_anchor_comment',
                 'type'              => 'string',
                 'default'           => 'comments'
             ],
             'pinFavorites' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.pin_favorites',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.pin_favorites_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.pin_favorites',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.pin_favorites_comment',
                 'type'              => 'checkbox',
                 'default'           => '0'
             ],
             'hideOnDislikes' => [
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.hide_on_dislike',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.hide_on_dislike_comment',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.hide_on_dislike',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.hide_on_dislike_comment',
                 'type'              => 'string',
                 'default'           => '0'
             ],
             'formPosition' => [
-                'group'             => 'ratmd.bloghub::lang.components.comments_section.group_form',
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.form_position',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.form_position_comment',
+                'group'             => 'forwintercms.bloghub::lang.components.comments_section.group_form',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.form_position',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.form_position_comment',
                 'type'              => 'dropdown',
                 'default'           => 'above',
                 'useSearch'         => false,
                 'options'           => [
-                    'above'             => 'ratmd.bloghub::lang.components.comments_section.form_position_above',
-                    'below'             => 'ratmd.bloghub::lang.components.comments_section.form_position_below',
+                    'above'             => 'forwintercms.bloghub::lang.components.comments_section.form_position_above',
+                    'below'             => 'forwintercms.bloghub::lang.components.comments_section.form_position_below',
                 ]
             ],
             'disableForm' => [
-                'group'             => 'ratmd.bloghub::lang.components.comments_section.group_form',
-                'title'             => 'ratmd.bloghub::lang.components.comments_section.disable_form',
-                'description'       => 'ratmd.bloghub::lang.components.comments_section.disable_form_comment',
+                'group'             => 'forwintercms.bloghub::lang.components.comments_section.group_form',
+                'title'             => 'forwintercms.bloghub::lang.components.comments_section.disable_form',
+                'description'       => 'forwintercms.bloghub::lang.components.comments_section.disable_form_comment',
                 'type'              => 'checkbox',
                 'default'           => '0'
             ],
@@ -150,12 +150,12 @@ class CommentSection extends ComponentBase
     public function getSortOrderOptions()
     {
         return [
-            'created_at DESC'   => Lang::get('ratmd.bloghub::lang.sorting.created_at_desc'),
-            'created_at ASC'    => Lang::get('ratmd.bloghub::lang.sorting.created_at_asc'),
-            'likes DESC'        => Lang::get('ratmd.bloghub::lang.sorting.likes_desc'),
-            'likes ASC'         => Lang::get('ratmd.bloghub::lang.sorting.likes_asc'),
-            'dislikes DESC'     => Lang::get('ratmd.bloghub::lang.sorting.dislikes_desc'),
-            'dislikes ASC'      => Lang::get('ratmd.bloghub::lang.sorting.dislikes_asc'),
+            'created_at DESC'   => Lang::get('forwintercms.bloghub::lang.sorting.created_at_desc'),
+            'created_at ASC'    => Lang::get('forwintercms.bloghub::lang.sorting.created_at_asc'),
+            'likes DESC'        => Lang::get('forwintercms.bloghub::lang.sorting.likes_desc'),
+            'likes ASC'         => Lang::get('forwintercms.bloghub::lang.sorting.likes_asc'),
+            'dislikes DESC'     => Lang::get('forwintercms.bloghub::lang.sorting.dislikes_desc'),
+            'dislikes ASC'      => Lang::get('forwintercms.bloghub::lang.sorting.dislikes_asc'),
         ];
     }
 
@@ -222,7 +222,7 @@ class CommentSection extends ComponentBase
                 $builder->where('status', 'approved')->orWhere(function ($builder) {
                     $builder->where('status', 'pending')
                         ->where('author_id', Visitor::currentUser()->id)
-                        ->where('author_table', 'RatMD\\BlogHub\\Models\\Visitor');
+                        ->where('author_table', 'ForWinterCms\\BlogHub\\Models\\Visitor');
                 });
             });
         }
@@ -333,7 +333,7 @@ class CommentSection extends ComponentBase
     {
         $this->post = $post = $this->getPost();
 
-        if (empty($post) || (!empty($post) && $post->ratmd_bloghub_comment_visible === '0')) {
+        if (empty($post) || (!empty($post) && $post->forwn_bloghub_comment_visible === '0')) {
             $this->page['showComments'] = false;
             $this->page['showCommentsForm'] = false;
             $this->page['showCommentsHierarchical'] = $this->property('commentHierarchy') === '1';
@@ -362,11 +362,11 @@ class CommentSection extends ComponentBase
             $this->page['comments'] = $this->getComments();
 
             if (version_compare(UpdateManager::instance()->getCurrentVersion(), '3.0.0', '<')) {
-                $this->addJs('/plugins/ratmd/bloghub/assets/js/comments-legacy.js');
+                $this->addJs('/plugins/forwintercms/bloghub/assets/js/comments-legacy.js');
             } else {
-                $this->addJs('/plugins/ratmd/bloghub/assets/js/comments.js');
+                $this->addJs('/plugins/forwintercms/bloghub/assets/js/comments.js');
             }
-            $this->addCss('/plugins/ratmd/bloghub/assets/css/comments.css');
+            $this->addCss('/plugins/forwintercms/bloghub/assets/css/comments.css');
         }
     }
 
@@ -396,7 +396,7 @@ class CommentSection extends ComponentBase
         }
         
         // Set Comments Mode
-        $this->page['commentsMode'] = $post->ratmd_bloghub_comment_mode;
+        $this->page['commentsMode'] = $post->forwn_bloghub_comment_mode;
         if ($this->config('guest_comments') === '0' && $this->page['commentsMode'] === 'public') {
             $this->page['commentsMode'] = 'restricted';     // Guests cannot comment [Settings]
         }
@@ -425,7 +425,7 @@ class CommentSection extends ComponentBase
         $this->page['currentUserCanLike'] = $like && (!$restrict || $this->page['isLoggedIn']);
         $this->page['currentUserCanDislike'] = $dislike && (!$restrict || $this->page['isLoggedIn']);
         $this->page['currentUserCanFavorite'] = $favorite && $user && intval($user->id) === intval($post->user_id);
-        $this->page['currentUserCanModerate'] = $this->page['currentUserIsBackend'] && $user && $user->hasPermission('ratmd.bloghub.comments.moderate_comments');
+        $this->page['currentUserCanModerate'] = $this->page['currentUserIsBackend'] && $user && $user->hasPermission('forwn.bloghub.comments.moderate_comments');
         
         // Skip when no comment form is shown
         if (!$this->page['currentUserCanComment']) {
@@ -545,16 +545,16 @@ class CommentSection extends ComponentBase
     protected function validateAjaxMethod()
     {
         if (empty($post = $this->getPost())) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_post'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_post'));
         }
         $this->prepareVars($post);
 
         // Check if Comment exists
         if (empty($comment_id = input('comment_id'))) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.missing_comment_id'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.missing_comment_id'));
         }
         if (empty($comment = Comment::where('id', $comment_id)->first())) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.invalid_comment_id'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.invalid_comment_id'));
         }
 
         // Return Comment
@@ -572,7 +572,7 @@ class CommentSection extends ComponentBase
 
         // Get new Status
         if (empty($status = input('status')) || !in_array($status, ['favorite', 'approve', 'reject', 'spam'])) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_error'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_error'));
         }
 
         // Favorite Comment
@@ -580,12 +580,12 @@ class CommentSection extends ComponentBase
 
             // Check if Favorite is enabled
             if ($this->config('author_favorites') !== '1') {
-                throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.disabled_method'));
+                throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.disabled_method'));
             }
     
             // Check if current user can favorite
             if (!$this->page['currentUserCanFavorite']) {
-                throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.not_allowed_to'));
+                throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.not_allowed_to'));
             }
 
             // Set Data
@@ -598,17 +598,17 @@ class CommentSection extends ComponentBase
 
             // Check if current user is backend user
             if (!$this->page['currentUserIsBackend']) {
-                throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.not_allowed_to'));
+                throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.not_allowed_to'));
             }
     
             // Check if current user is allowed to moderatoe
             if (!$this->page['currentUserCanModerate']) {
-                throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.no_permissions_for'));
+                throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.no_permissions_for'));
             }
 
             // Check if State can be changed (Frontend Moderation is limited to pending comments)
             if ($comment->status !== 'pending') {
-                throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_error'));
+                throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_error'));
             }
             $result = $comment->{$status}();
         }
@@ -622,7 +622,7 @@ class CommentSection extends ComponentBase
                 ])
             ];
         } else {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_error'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_error'));
         }
     }
 
@@ -637,17 +637,17 @@ class CommentSection extends ComponentBase
 
         // Get new Vote
         if (empty($vote = input('vote')) || !in_array($vote, ['like', 'dislike'])) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_error'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_error'));
         }
 
         // Check if Like or dislike is enabled
         if ($this->config($vote . '_comment') !== '1') {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.disabled_method'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.disabled_method'));
         }
 
         // Check if current user can Like or Dislike
         if (!$this->page['currentUserCan' . ucfirst($vote)]) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.not_allowed_to'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.not_allowed_to'));
         }
 
         // Add Vote & Return
@@ -659,7 +659,7 @@ class CommentSection extends ComponentBase
                 ])
             ];
         } else {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_error'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_error'));
         }
     }
 
@@ -674,12 +674,12 @@ class CommentSection extends ComponentBase
 
         // Check if form is disabled
         if (!$this->page['showCommentsForm']) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.form_disabled'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.form_disabled'));
         }
 
         // Check if current user can comment
         if (!$this->page['currentUserCanComment']) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.not_allowed_to_comment'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.not_allowed_to_comment'));
         }
 
         // Return Reply Partial and submit button text
@@ -689,7 +689,7 @@ class CommentSection extends ComponentBase
                 'comment' => $comment
             ]),
             'comment' => $comment,
-            'submitText' => Lang::get('ratmd.bloghub::lang.frontend.comments.submit_reply')
+            'submitText' => Lang::get('forwintercms.bloghub::lang.frontend.comments.submit_reply')
         ];
     }
 
@@ -701,7 +701,7 @@ class CommentSection extends ComponentBase
     public function onCancelReply()
     {
         return [
-            'submitText' => Lang::get('ratmd.bloghub::lang.frontend.comments.submit_comment')
+            'submitText' => Lang::get('forwintercms.bloghub::lang.frontend.comments.submit_comment')
         ];
     }
     
@@ -729,14 +729,14 @@ class CommentSection extends ComponentBase
     public function onComment()
     {
         if (empty($post = $this->getPost())) {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_post'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_post'));
         }
         $this->prepareVars($post);
 
         // Validate CSRF Token
         if (!$this->verifyCsrfToken()) {
             throw new AjaxException([
-                'message' => Lang::get('ratmd.bloghub::lang.frontend.errors.invalid_csrf_token')
+                'message' => Lang::get('forwintercms.bloghub::lang.frontend.errors.invalid_csrf_token')
             ]);
         }
 
@@ -745,7 +745,7 @@ class CommentSection extends ComponentBase
         $hasHoneypot = false;
         if (!$this->verifyValidationCode(input('comment_validation'), input('comment_time'), $hasCaptcha, $hasHoneypot)) {
             throw new AjaxException([
-                'message' => Lang::get('ratmd.bloghub::lang.frontend.errors.invalid_validation_code')
+                'message' => Lang::get('forwintercms.bloghub::lang.frontend.errors.invalid_validation_code')
             ]);
         }
 
@@ -756,7 +756,7 @@ class CommentSection extends ComponentBase
                 Session::put('bloghubCaptchaPhrase', $builder->getPhrase());
 
                 throw new AjaxException([
-                    'message' => Lang::get('ratmd.bloghub::lang.frontend.errors.invalid_captcha') . Session::get('bloghubCaptchaPhrase'),
+                    'message' => Lang::get('forwintercms.bloghub::lang.frontend.errors.invalid_captcha') . Session::get('bloghubCaptchaPhrase'),
                     'captchaImage' => $builder->inline()
                 ]);
             }
@@ -768,7 +768,7 @@ class CommentSection extends ComponentBase
 
             if (empty($honey) || !empty(input('comment_user')) || !empty(input('comment_email'))) {
                 throw new AjaxException([
-                    'message' => Lang::get('ratmd.bloghub::lang.frontend.errors.honeypot_filled')
+                    'message' => Lang::get('forwintercms.bloghub::lang.frontend.errors.honeypot_filled')
                 ]);
             }
 
@@ -778,14 +778,14 @@ class CommentSection extends ComponentBase
         // Check current User
         if (!$this->page['currentUserCanComment']) {
             throw new AjaxException([
-                'message' => Lang::get('ratmd.bloghub::lang.frontend.errors.not_allowed_to_commentd')
+                'message' => Lang::get('forwintercms.bloghub::lang.frontend.errors.not_allowed_to_commentd')
             ]);
         }
 
         // Validate Terms of Service
         if ($this->page['showCommentFormTos'] && input('comment_tos') !== '1') {
             throw new AjaxException([
-                'message' => Lang::get('ratmd.bloghub::lang.frontend.errors.tos_not_accepted')
+                'message' => Lang::get('forwintercms.bloghub::lang.frontend.errors.tos_not_accepted')
             ]);
         }
 
@@ -827,14 +827,14 @@ class CommentSection extends ComponentBase
             // Comment ID unknown
             if (empty($parent = Comment::where('id', $parentId)->first())) {
                 throw new AjaxException([
-                    'message' => Lang::get('ratmd.bloghub::lang.frontend.errors.parent_not_found')
+                    'message' => Lang::get('forwintercms.bloghub::lang.frontend.errors.parent_not_found')
                 ]);
             }
 
             // Comment not on the same Post
             if (intval($parent->post_id) !== intval($post->id)) {
                 throw new AjaxException([
-                    'message' => Lang::get('ratmd.bloghub::lang.frontend.errors.parent_invalid')
+                    'message' => Lang::get('forwintercms.bloghub::lang.frontend.errors.parent_invalid')
                 ]);
             }
 
@@ -856,7 +856,7 @@ class CommentSection extends ComponentBase
                 'comments' => $this->renderPartial('@default')
             ];
         } else {
-            throw new AjaxException(Lang::get('ratmd.bloghub::lang.frontend.errors.unknown_error'));
+            throw new AjaxException(Lang::get('forwintercms.bloghub::lang.frontend.errors.unknown_error'));
         }
     }
 

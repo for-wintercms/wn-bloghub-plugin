@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Models;
+namespace ForWinterCms\BlogHub\Models;
 
 use Lang;
 use Cms\Classes\Page;
 use Cms\Classes\Theme;
-use October\Rain\Database\Model;
-use RainLab\Pages\Classes\Page as RainLabPage;
-use RainLab\Pages\Classes\PageList as RainLabPageList;
+use Winter\Storm\Database\Model;
+use Winter\Pages\Classes\Page as RainLabPage;
+use Winter\Pages\Classes\PageList as RainLabPageList;
 use System\Classes\PluginManager;
 
 class BlogHubSettings extends Model
@@ -35,7 +35,7 @@ class BlogHubSettings extends Model
             "form_comment_captcha" => '0',
             "form_tos_checkbox" => '0',
             "form_tos_hide_on_user" => '1',
-            "form_tos_label" => Lang::get('ratmd.bloghub::lang.settings.comments.form_tos_label.default'),
+            "form_tos_label" => Lang::get('forwintercms.bloghub::lang.settings.comments.form_tos_label.default'),
             "form_tos_type" => 'cms_page',
             "form_tos_cms_page" => '',
             "form_tos_static_page" => '',
@@ -54,7 +54,7 @@ class BlogHubSettings extends Model
      *
      * @var string
      */
-    public $settingsCode = 'ratmd_bloghub_core_settings';
+    public $settingsCode = 'forwn_bloghub_core_settings';
 
     /**
      * Settings Fields
@@ -71,11 +71,11 @@ class BlogHubSettings extends Model
     public function getFormTosTypeOptions()
     {
         $options = [
-            'cms_page' => Lang::get('ratmd.bloghub::lang.settings.comments.form_tos_type.cms_page')
+            'cms_page' => Lang::get('forwintercms.bloghub::lang.settings.comments.form_tos_type.cms_page')
         ];
 
         if (PluginManager::instance()->hasPlugin('RainLab.Pages')) {
-            $options['static_page'] = Lang::get('ratmd.bloghub::lang.settings.comments.form_tos_type.static_page');
+            $options['static_page'] = Lang::get('forwintercms.bloghub::lang.settings.comments.form_tos_type.static_page');
         }
 
         return $options;

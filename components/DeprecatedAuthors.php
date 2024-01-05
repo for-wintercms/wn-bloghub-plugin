@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace RatMD\BlogHub\Components;
+namespace ForWinterCms\BlogHub\Components;
 
 use Log;
 
@@ -14,8 +14,8 @@ class DeprecatedAuthors extends PostsByAuthor
     public function componentDetails()
     {
         return [
-            'name'          => 'ratmd.bloghub::lang.components.deprecated.authors_label',
-            'description'   => 'ratmd.bloghub::lang.components.deprecated.authors_comment'
+            'name'          => 'forwintercms.bloghub::lang.components.deprecated.authors_label',
+            'description'   => 'forwintercms.bloghub::lang.components.deprecated.authors_comment'
         ];
     }
 

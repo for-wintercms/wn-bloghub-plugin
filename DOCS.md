@@ -115,12 +115,12 @@ However, backend users are able to view and moderate pending comments on the sin
 Comments can either be accessed directly on the post model, using `bloghub.comments` or `bloghub.comments_count`  or by using one of the available template components, as described below.
 
 ## Blog Meta
-Each single blog post can be extended and enriched with additional meta fields, for example to provide specific data for the frontend templating or settig SEO-specific values. Meta fields can either be set on the template's `theme.yaml` file or using the "Custom Meta Fields" settings page on Octobers backend. The first solution is meant for template designers to provide "already supported" and implemented meta fields. The second one is especially designed for administrators to provide a general-available set of meta field (which must be implemented manually, of course).
+Each single blog post can be extended and enriched with additional meta fields, for example to provide specific data for the frontend templating or settig SEO-specific values. Meta fields can either be set on the template's `theme.yaml` file or using the "Custom Meta Fields" settings page on Winters backend. The first solution is meant for template designers to provide "already supported" and implemented meta fields. The second one is especially designed for administrators to provide a general-available set of meta field (which must be implemented manually, of course).
 
 However, the single meta values can be access on the respective post model using `post.bloghub.meta.[meta_key]`.
 
 ### Create Meta Fields via theme.yaml
-Theme-related meta fields must be set in the template's `theme.yaml` file, using Octobers [Form Fields definition syntax](https://docs.octobercms.com/3.x/element/definitions.html):
+Theme-related meta fields must be set in the template's `theme.yaml` file, using Winters [Form Fields definition syntax](https://wintercms.com/docs/v1.2/docs/backend/forms):
 
 ```yaml
 # Your Theme Data
@@ -131,7 +131,7 @@ forwn.bloghub:
 ```
 
 ### Create Meta Fields via Backend
-Global meta fields can be created on the "Custom Meta Fields" settings page. Here you can define a custom meta name, the respective meta type and te meta configuration... again using Octobers [Form Fields definition syntax](https://docs.octobercms.com/3.x/element/definitions.html).
+Global meta fields can be created on the "Custom Meta Fields" settings page. Here you can define a custom meta name, the respective meta type and te meta configuration... again using Winters [Form Fields definition syntax](https://wintercms.com/docs/v1.2/docs/backend/forms).
 
 ## Blog Tags
 BlogHub provides additional blog tags, which can be created and assigned on the fly on each blog post. However, tags can also be additionally customized by setting a promotion flag, title, description and color. All of those additional values CAN be used by template designers to highlight or describe your tags or tag archive pages even better.
